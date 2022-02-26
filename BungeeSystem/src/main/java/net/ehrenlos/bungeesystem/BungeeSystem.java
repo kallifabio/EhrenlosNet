@@ -1,5 +1,7 @@
 package net.ehrenlos.bungeesystem;
 
+import net.ehrenlos.bungeesystem.commands.coinsCommand;
+import net.ehrenlos.bungeesystem.manager.CoinsSystemManager;
 import net.ehrenlos.bungeesystem.manager.MySQLManager;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -15,18 +17,7 @@ public class BungeeSystem extends Plugin {
     private static String noPerms = "§4Du hast dazu keine Rechte";
 
     private final MySQLManager mySQLManager = new MySQLManager();
-
-    public static BungeeSystem getInstance() {
-        return instance;
-    }
-
-    public static String getPrefix() {
-        return prefix;
-    }
-
-    public static String getNoPerms() {
-        return noPerms;
-    }
+    private static CoinsSystemManager coinsSystemManager;
 
     @Override
     public void onEnable() {
@@ -59,19 +50,39 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
     }
 
-    private void registerCommands() {
-        PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
+    public static BungeeSystem getInstance() {
+        return instance;
+    }
+
+    public static String getPrefix() {
+        return prefix;
+    }
+
+    public static String getNoPerms() {
+        return noPerms;
+    }
+
+    public static CoinsSystemManager getCoinsSystemManager() {
+        return coinsSystemManager;
     }
 
     private void unregisterEvents() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
     }
 
-    private void unregisterCommands() {
+    private void registerCommands() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
+
+        pluginManager.registerCommand(this, new coinsCommand("coins"));
     }
 
     public MySQLManager getMySQLManager() {
         return mySQLManager;
+    }
+
+    private void unregisterCommands() {
+        PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
+
+        pluginManager.unregisterCommand(new coinsCommand("coins"));
     }
 }

@@ -7,9 +7,12 @@ import net.ehrenlos.lobbysystem.inventorys.NavigatorInventory;
 import net.ehrenlos.lobbysystem.listeners.PlayerListener;
 import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
+import net.ehrenlos.lobbysystem.manager.MySQLManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.sql.SQLException;
 
 public class LobbySystem extends JavaPlugin {
 
@@ -20,6 +23,7 @@ public class LobbySystem extends JavaPlugin {
 
     private static ConfigManager configManager = new ConfigManager();
     private static LocationManager locationManager = new LocationManager();
+    private static MySQLManager mySQLManager = new MySQLManager();
 
     public static LobbySystem getInstance() {
         return instance;
@@ -27,25 +31,6 @@ public class LobbySystem extends JavaPlugin {
 
     public static String getPrefix() {
         return prefix;
-    }
-
-    public static String getNoPerms() {
-        return noPerms;
-    }
-
-    @Override
-    public void onEnable() {
-        instance = this;
-        registerEvents();
-        registerCommands();
-        registerInventorys();
-
-        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin wurde aktiviert");
-    }
-
-    @Override
-    public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin wurde deaktiviert");
     }
 
     private void registerCommands() {
@@ -64,5 +49,46 @@ public class LobbySystem extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         pluginManager.registerEvents(new NavigatorInventory(), this);
+    }
+
+    public static String getNoPerms() {
+        return noPerms;
+    }
+
+    public static ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public static LocationManager getLocationManager() {
+        return locationManager;
+    }
+
+    public static MySQLManager getMySQLManager() {
+        return mySQLManager;
+    }
+
+    @Override
+    public void onEnable() {
+        instance = this;
+        registerEvents();
+        registerCommands();
+        registerInventorys();
+
+        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin wurde aktiviert");
+
+        try {
+            Bukkit.getConsoleSender().sendMessage(prefix + "§2Wird mit MySQL verbunden");
+            mySQLManager.openConnection();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDisable() {
+        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin wurde deaktiviert");
+
+        Bukkit.getConsoleSender().sendMessage(prefix + "§2MySQL wird geschlossen");
+        mySQLManager.closeConnection();
     }
 }
