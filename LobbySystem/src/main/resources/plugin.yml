@@ -1,0 +1,9 @@
+api-version: 1.16
+name: EhrenlosLobbySystem
+main: net.ehrenlos.lobbysystem.LobbySystem
+version: 1.0
+
+commands:
+  setlocation:
+  gm:
+  fly:
