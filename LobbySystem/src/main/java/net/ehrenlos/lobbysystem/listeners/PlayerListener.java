@@ -178,6 +178,14 @@ public class PlayerListener implements Listener {
 
         if (player.hasPermission("lobbysystem.rang.admin")) {
             objective.getScore("§8» §4Admin").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.developer")) {
+            objective.getScore("§8» §3Developer").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.moderator")) {
+            objective.getScore("§8» §cModerator").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.builder")) {
+            objective.getScore("§8» §2Builder").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.supporter")) {
+            objective.getScore("§8» §9Supporter").setScore(5);
         } else {
             objective.getScore("§8» §8Spieler").setScore(5);
         }
