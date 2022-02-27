@@ -19,7 +19,7 @@ public class setlocationCommand implements CommandExecutor {
         final Player player = (Player) sender;
         if (player.hasPermission("LobbySystem.command.setlocation")) {
             if (args.length == 0) {
-                player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team>");
+                player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns>");
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("spawn")) {
                     player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9Spawn §agesetzt");
@@ -27,8 +27,11 @@ public class setlocationCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("team")) {
                     player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9Team §agesetzt");
                     LocationManager.setLocation("Team", player.getLocation());
+                } else if (args[0].equalsIgnoreCase("jumpandruns")) {
+                    player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9JumpAndRuns §agesetzt");
+                    LocationManager.setLocation("JumpAndRuns", player.getLocation());
                 } else {
-                    player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team>");
+                    player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns>");
                 }
             }
         } else {

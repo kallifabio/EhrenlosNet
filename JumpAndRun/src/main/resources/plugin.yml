@@ -1,0 +1,4 @@
+api-version: 1.16
+name: EhrenlosJumpAndRun
+main: net.ehrenlos.jumpandrun.JumpAndRun
+version: 1.0

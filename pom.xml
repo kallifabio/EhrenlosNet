@@ -11,6 +11,7 @@
     <modules>
         <module>LobbySystem</module>
         <module>BungeeSystem</module>
+        <module>JumpAndRun</module>
     </modules>
 
     <properties>

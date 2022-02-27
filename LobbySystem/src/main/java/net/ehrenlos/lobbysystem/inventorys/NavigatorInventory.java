@@ -37,6 +37,7 @@ public class NavigatorInventory implements Listener {
 
         navigatorInventory.setItem(22, new ItemManager(Material.GOLD_BLOCK).setDisplayName("§e● §6Spawn").setLore("§7Teleportiere dich zum Spawn").build());
         navigatorInventory.setItem(8, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Team").setLore("§7Teleportiere dich zum Team").build());
+        navigatorInventory.setItem(4, new ItemManager(Material.GREEN_STAINED_GLASS).setDisplayName("§e● §6Jump And Runs").setLore("§7Teleportiere dich zu den Jump And Runs").build());
 
         for (int i = 0; i < navigatorInventory.getSize(); i++) {
             if (navigatorInventory.getItem(i) == null) {
@@ -64,6 +65,12 @@ public class NavigatorInventory implements Listener {
                     player.teleport(LocationManager.getLocation("Team"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.sendTitle("§d§lTeleport", "§8» §aTeam", 25, 25, 25);
+                    player.closeInventory();
+                    break;
+                case "§e● §6JumpAndRuns":
+                    player.teleport(LocationManager.getLocation("JumpAndRuns"));
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
+                    player.sendTitle("§d§lTeleport", "§8» §aJump And Runs", 25, 25, 25);
                     player.closeInventory();
                     break;
             }
