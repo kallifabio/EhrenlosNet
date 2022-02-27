@@ -44,9 +44,9 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
-            } else {
-                player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
             }
+        } else {
+            player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
         }
 
         if (args.length == 3) {
@@ -61,8 +61,6 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
-            } else {
-                player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
             }
             if (player.hasPermission("bungeesystem.command.coins.add")) {
                 if (args[0].equalsIgnoreCase("add")) {
@@ -74,8 +72,6 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
-            } else {
-                player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
             }
             if (player.hasPermission("bungeesystem.command.coins.remove")) {
                 if (args[0].equalsIgnoreCase("remove")) {
@@ -89,9 +85,9 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
-            } else {
-                player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
             }
+        } else {
+            player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
         }
     }
 }
