@@ -4,6 +4,8 @@ import net.ehrenlos.lobbysystem.commands.flyCommand;
 import net.ehrenlos.lobbysystem.commands.gamemodeCommand;
 import net.ehrenlos.lobbysystem.commands.setlocationCommand;
 import net.ehrenlos.lobbysystem.inventorys.NavigatorInventory;
+import net.ehrenlos.lobbysystem.listeners.EntityListener;
+import net.ehrenlos.lobbysystem.listeners.ItemListener;
 import net.ehrenlos.lobbysystem.listeners.PlayerListener;
 import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
@@ -33,24 +35,6 @@ public class LobbySystem extends JavaPlugin {
         return prefix;
     }
 
-    private void registerCommands() {
-        getCommand("setlocation").setExecutor(new setlocationCommand());
-        getCommand("gm").setExecutor(new gamemodeCommand());
-        getCommand("fly").setExecutor(new flyCommand());
-    }
-
-    private void registerEvents() {
-        PluginManager pluginManager = Bukkit.getPluginManager();
-
-        pluginManager.registerEvents(new PlayerListener(), this);
-    }
-
-    private void registerInventorys() {
-        PluginManager pluginManager = Bukkit.getPluginManager();
-
-        pluginManager.registerEvents(new NavigatorInventory(), this);
-    }
-
     public static String getNoPerms() {
         return noPerms;
     }
@@ -65,6 +49,26 @@ public class LobbySystem extends JavaPlugin {
 
     public static MySQLManager getMySQLManager() {
         return mySQLManager;
+    }
+
+    private void registerCommands() {
+        getCommand("setlocation").setExecutor(new setlocationCommand());
+        getCommand("gm").setExecutor(new gamemodeCommand());
+        getCommand("fly").setExecutor(new flyCommand());
+    }
+
+    private void registerEvents() {
+        PluginManager pluginManager = Bukkit.getPluginManager();
+
+        pluginManager.registerEvents(new PlayerListener(), this);
+        pluginManager.registerEvents(new ItemListener(), this);
+        pluginManager.registerEvents(new EntityListener(), this);
+    }
+
+    private void registerInventorys() {
+        PluginManager pluginManager = Bukkit.getPluginManager();
+
+        pluginManager.registerEvents(new NavigatorInventory(), this);
     }
 
     @Override
