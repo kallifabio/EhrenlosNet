@@ -1,6 +1,7 @@
 package net.ehrenlos.bungeesystem;
 
 import net.ehrenlos.bungeesystem.commands.coinsCommand;
+import net.ehrenlos.bungeesystem.commands.teamchatCommand;
 import net.ehrenlos.bungeesystem.manager.CoinsSystemManager;
 import net.ehrenlos.bungeesystem.manager.MySQLManager;
 import net.md_5.bungee.BungeeCord;
@@ -74,6 +75,7 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.registerCommand(this, new coinsCommand("coins"));
+        pluginManager.registerCommand(this, new teamchatCommand("tc"));
     }
 
     public MySQLManager getMySQLManager() {
@@ -84,5 +86,6 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.unregisterCommand(new coinsCommand("coins"));
+        pluginManager.unregisterCommand(new teamchatCommand("tc"));
     }
 }

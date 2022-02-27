@@ -67,7 +67,7 @@ public class NavigatorInventory implements Listener {
                     player.sendTitle("§d§lTeleport", "§8» §aTeam", 25, 25, 25);
                     player.closeInventory();
                     break;
-                case "§e● §6JumpAndRuns":
+                case "§e● §6Jump And Runs":
                     player.teleport(LocationManager.getLocation("JumpAndRuns"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.sendTitle("§d§lTeleport", "§8» §aJump And Runs", 25, 25, 25);
