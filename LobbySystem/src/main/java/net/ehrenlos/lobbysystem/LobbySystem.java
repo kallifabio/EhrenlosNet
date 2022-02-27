@@ -4,6 +4,7 @@ import net.ehrenlos.lobbysystem.commands.flyCommand;
 import net.ehrenlos.lobbysystem.commands.gamemodeCommand;
 import net.ehrenlos.lobbysystem.commands.setlocationCommand;
 import net.ehrenlos.lobbysystem.inventorys.NavigatorInventory;
+import net.ehrenlos.lobbysystem.inventorys.PlayerHiderInventory;
 import net.ehrenlos.lobbysystem.listeners.EntityListener;
 import net.ehrenlos.lobbysystem.listeners.ItemListener;
 import net.ehrenlos.lobbysystem.listeners.PlayerListener;
@@ -69,6 +70,7 @@ public class LobbySystem extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         pluginManager.registerEvents(new NavigatorInventory(), this);
+        pluginManager.registerEvents(new PlayerHiderInventory(), this);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package net.ehrenlos.jumpandrun.manager;
 
-import net.ehrenlos.lobbysystem.utils.FileBuilder;
+import net.ehrenlos.jumpandrun.utils.FileBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

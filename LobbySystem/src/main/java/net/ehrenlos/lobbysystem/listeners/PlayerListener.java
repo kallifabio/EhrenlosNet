@@ -139,6 +139,7 @@ public class PlayerListener implements Listener {
 
         player.getInventory().clear();
         player.getInventory().setItem(0, new ItemManager(Material.COMPASS).setDisplayName("§6Navigator §8| §eRechtsklick").build());
+        player.getInventory().setItem(2, new ItemManager(Material.BLAZE_ROD).setDisplayName("§6PlayerHider §8| §eRechtsklick").build());
 
         player.setGameMode(GameMode.SURVIVAL);
         player.setHealth(20D);
