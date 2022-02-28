@@ -1,12 +1,10 @@
 package net.ehrenlos.lobbysystem.listeners;
 
+import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.WeatherType;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -145,6 +143,15 @@ public class PlayerListener implements Listener {
         player.setHealth(20D);
         player.setFoodLevel(20);
         player.setPlayerWeather(WeatherType.CLEAR);
+
+        Bukkit.getWorlds().forEach(current -> {
+            current.setPVP(false);
+            current.setDifficulty(Difficulty.PEACEFUL);
+
+            if (current.isThundering()) {
+                current.setThundering(false);
+            }
+        });
 
         if (!isRegistered(player.getName())) {
             setCoins(player.getName(), 0);

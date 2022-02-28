@@ -22,10 +22,10 @@ public class coinsCommand extends Command {
 
         final ProxiedPlayer player = (ProxiedPlayer) sender;
         if (args.length == 0) {
-            if (CoinsSystemManager.isRegistered(sender.getName())) {
-                sender.sendMessage(BungeeSystem.getPrefix() + "§2Du hast §7" + CoinsSystemManager.getCoins(sender.getName()) + " §2Coins");
+            if (CoinsSystemManager.isRegistered(player.getName())) {
+                player.sendMessage(BungeeSystem.getPrefix() + "§2Du hast §7" + CoinsSystemManager.getCoins(player.getName()) + " §2Coins");
             } else {
-                sender.sendMessage(BungeeSystem.getPrefix() + "§2Du bist nicht registriert");
+                player.sendMessage(BungeeSystem.getPrefix() + "§2Du bist nicht registriert");
             }
         }
 
@@ -44,9 +44,9 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
+            } else {
+                player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
             }
-        } else {
-            player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
         }
 
         if (args.length == 3) {
@@ -61,7 +61,10 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
+            } else {
+                player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
             }
+
             if (player.hasPermission("bungeesystem.command.coins.add")) {
                 if (args[0].equalsIgnoreCase("add")) {
                     if (target != null) {
@@ -72,7 +75,10 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
+            } else {
+                player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
             }
+
             if (player.hasPermission("bungeesystem.command.coins.remove")) {
                 if (args[0].equalsIgnoreCase("remove")) {
                     if (target != null) {
@@ -85,9 +91,9 @@ public class coinsCommand extends Command {
                         player.sendMessage(BungeeSystem.getPrefix() + "§cSpieler ist nicht online oder nicht registriert");
                     }
                 }
+            } else {
+                player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
             }
-        } else {
-            player.sendMessage(BungeeSystem.getPrefix() + "§4Du hast dazu keine Rechte");
         }
     }
 }
