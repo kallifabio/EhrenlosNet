@@ -1,14 +1,18 @@
 package net.ehrenlos.bungeesystem;
 
-import net.ehrenlos.bungeesystem.commands.coinsCommand;
-import net.ehrenlos.bungeesystem.commands.teamchatCommand;
+import net.ehrenlos.bungeesystem.commands.*;
+import net.ehrenlos.bungeesystem.listeners.PlayerDisconnectListener;
+import net.ehrenlos.bungeesystem.listeners.ServerConnectListener;
 import net.ehrenlos.bungeesystem.manager.CoinsSystemManager;
 import net.ehrenlos.bungeesystem.manager.MySQLManager;
+import net.ehrenlos.bungeesystem.manager.OnlineTimeManager;
 import net.md_5.bungee.BungeeCord;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BungeeSystem extends Plugin {
 
@@ -19,6 +23,10 @@ public class BungeeSystem extends Plugin {
 
     private final MySQLManager mySQLManager = new MySQLManager();
     private static CoinsSystemManager coinsSystemManager;
+    private static OnlineTimeManager onlineTimeManager;
+
+    public static ArrayList<ProxiedPlayer> staff = new ArrayList<>();
+    public static ArrayList<ProxiedPlayer> notify = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -34,6 +42,8 @@ public class BungeeSystem extends Plugin {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        OnlineTimeManager.startOnlineTimeTracking();
     }
 
     @Override
@@ -49,6 +59,9 @@ public class BungeeSystem extends Plugin {
 
     private void registerEvents() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
+
+        pluginManager.registerListener(this, new PlayerDisconnectListener());
+        pluginManager.registerListener(this, new ServerConnectListener());
     }
 
     public static BungeeSystem getInstance() {
@@ -67,8 +80,23 @@ public class BungeeSystem extends Plugin {
         return coinsSystemManager;
     }
 
+    public OnlineTimeManager getOnlineTimeManager() {
+        return onlineTimeManager;
+    }
+
+    public static ArrayList<ProxiedPlayer> getStaff() {
+        return staff;
+    }
+
+    public static ArrayList<ProxiedPlayer> getNotify() {
+        return notify;
+    }
+
     private void unregisterEvents() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
+
+        pluginManager.unregisterListener(new PlayerDisconnectListener());
+        pluginManager.unregisterListener(new ServerConnectListener());
     }
 
     private void registerCommands() {
@@ -76,6 +104,10 @@ public class BungeeSystem extends Plugin {
 
         pluginManager.registerCommand(this, new coinsCommand("coins"));
         pluginManager.registerCommand(this, new teamchatCommand("tc"));
+        pluginManager.registerCommand(this, new onlinetimeCommand("onlinetime"));
+        pluginManager.registerCommand(this, new onlinetimetopCommand("onlinetimetop"));
+        pluginManager.registerCommand(this, new joinmeCommand("joinme"));
+        pluginManager.registerCommand(this, new staffCommand("staff"));
     }
 
     public MySQLManager getMySQLManager() {
@@ -87,5 +119,9 @@ public class BungeeSystem extends Plugin {
 
         pluginManager.unregisterCommand(new coinsCommand("coins"));
         pluginManager.unregisterCommand(new teamchatCommand("tc"));
+        pluginManager.unregisterCommand(new onlinetimeCommand("onlinetime"));
+        pluginManager.unregisterCommand(new onlinetimetopCommand("onlinetimetop"));
+        pluginManager.unregisterCommand(new joinmeCommand("joinme"));
+        pluginManager.unregisterCommand(new staffCommand("staff"));
     }
 }

@@ -14,7 +14,7 @@ public class MySQLManager {
     private final String user = "nitschpas";
     private final String password = "ehrenlosdatenbank!";
 
-    private static boolean isConnected() {
+    public static boolean isConnected() {
         return connection != null;
     }
 
@@ -99,4 +99,5 @@ public class MySQLManager {
     public String getPassword() {
         return password;
     }
+
 }

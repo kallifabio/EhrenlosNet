@@ -88,6 +88,8 @@ public class LobbySystem extends JavaPlugin {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @Override
@@ -96,5 +98,7 @@ public class LobbySystem extends JavaPlugin {
 
         Bukkit.getConsoleSender().sendMessage(prefix + "§2MySQL wird geschlossen");
         mySQLManager.closeConnection();
+
+        getServer().getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
     }
 }

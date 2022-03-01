@@ -1,5 +1,8 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import net.ehrenlos.lobbysystem.LobbySystem;
 import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import org.bukkit.Bukkit;
@@ -12,7 +15,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 public class NavigatorInventory implements Listener {
@@ -38,6 +45,7 @@ public class NavigatorInventory implements Listener {
         navigatorInventory.setItem(22, new ItemManager(Material.GOLD_BLOCK).setDisplayName("§e● §6Spawn").setLore("§7Teleportiere dich zum Spawn").build());
         navigatorInventory.setItem(8, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Team").setLore("§7Teleportiere dich zum Team").build());
         navigatorInventory.setItem(4, new ItemManager(Material.GREEN_STAINED_GLASS).setDisplayName("§e● §6Jump And Runs").setLore("§7Teleportiere dich zu den Jump And Runs").build());
+        navigatorInventory.setItem(0, new ItemManager(Material.GRASS_BLOCK).setDisplayName("§e● §6Bauserver").setLore("§7Teleportiere dich zum Bauserver").build());
 
         for (int i = 0; i < navigatorInventory.getSize(); i++) {
             if (navigatorInventory.getItem(i) == null) {
@@ -71,6 +79,23 @@ public class NavigatorInventory implements Listener {
                     player.teleport(LocationManager.getLocation("JumpAndRuns"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.sendTitle("§d§lTeleport", "§8» §aJump And Runs", 25, 25, 25);
+                    player.closeInventory();
+                    break;
+                case "§e● §6Bauserver":
+                    if (player.hasPermission("lobbysystem.bauserver")) {
+                        ByteArrayOutputStream b = new ByteArrayOutputStream();
+                        DataOutputStream out = new DataOutputStream(b);
+                        try {
+                            out.writeUTF("Connect");
+                            out.writeUTF("Bauserver-1");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        player.sendPluginMessage(LobbySystem.getInstance(), "BungeeCord", b.toByteArray());
+                    } else {
+                        player.sendMessage(LobbySystem.getPrefix() + LobbySystem.getNoPerms());
+                    }
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.closeInventory();
                     break;
             }
