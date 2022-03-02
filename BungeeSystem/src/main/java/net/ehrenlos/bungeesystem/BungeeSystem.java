@@ -1,15 +1,19 @@
 package net.ehrenlos.bungeesystem;
 
 import net.ehrenlos.bungeesystem.commands.*;
+import net.ehrenlos.bungeesystem.listeners.LogInListener;
 import net.ehrenlos.bungeesystem.listeners.PlayerDisconnectListener;
+import net.ehrenlos.bungeesystem.listeners.ProxyPingListener;
 import net.ehrenlos.bungeesystem.listeners.ServerConnectListener;
 import net.ehrenlos.bungeesystem.manager.CoinsSystemManager;
 import net.ehrenlos.bungeesystem.manager.MySQLManager;
 import net.ehrenlos.bungeesystem.manager.OnlineTimeManager;
+import net.ehrenlos.bungeesystem.manager.ServerInfoManager;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
+import sun.rmi.runtime.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class BungeeSystem extends Plugin {
     private final MySQLManager mySQLManager = new MySQLManager();
     private static CoinsSystemManager coinsSystemManager;
     private static OnlineTimeManager onlineTimeManager;
+    public static ServerInfoManager serverInfoManager = new ServerInfoManager();
+    public static ServerInfoManager schedulerController = new ServerInfoManager();
 
     public static ArrayList<ProxiedPlayer> staff = new ArrayList<>();
     public static ArrayList<ProxiedPlayer> notify = new ArrayList<>();
@@ -47,6 +53,7 @@ public class BungeeSystem extends Plugin {
         }
 
         OnlineTimeManager.startOnlineTimeTracking();
+        ServerInfoManager.startScheduler();
     }
 
     @Override
@@ -65,6 +72,8 @@ public class BungeeSystem extends Plugin {
 
         pluginManager.registerListener(this, new PlayerDisconnectListener());
         pluginManager.registerListener(this, new ServerConnectListener());
+        pluginManager.registerListener(this, new LogInListener());
+        pluginManager.registerListener(this, new ProxyPingListener());
     }
 
     public static BungeeSystem getInstance() {
@@ -100,17 +109,23 @@ public class BungeeSystem extends Plugin {
 
         pluginManager.unregisterListener(new PlayerDisconnectListener());
         pluginManager.unregisterListener(new ServerConnectListener());
+        pluginManager.unregisterListener(new LogInListener());
+        pluginManager.unregisterListener(new ProxyPingListener());
     }
 
     private void registerCommands() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.registerCommand(this, new coinsCommand("coins"));
-        pluginManager.registerCommand(this, new teamchatCommand("tc"));
+        pluginManager.registerCommand(this, new teamchatCommand("tc", "teamchat"));
         pluginManager.registerCommand(this, new onlinetimeCommand("onlinetime"));
         pluginManager.registerCommand(this, new onlinetimetopCommand("onlinetimetop"));
         pluginManager.registerCommand(this, new joinmeCommand("joinme"));
         pluginManager.registerCommand(this, new staffCommand("staff"));
+        pluginManager.registerCommand(this, new jumpCommand("jump"));
+        pluginManager.registerCommand(this, new pingCommand("ping"));
+        pluginManager.registerCommand(this, new broadcastCommand("broadcast", "br"));
+        pluginManager.registerCommand(this, new serverinfoCommand("serverinfo"));
     }
 
     public MySQLManager getMySQLManager() {
@@ -121,11 +136,15 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.unregisterCommand(new coinsCommand("coins"));
-        pluginManager.unregisterCommand(new teamchatCommand("tc"));
+        pluginManager.unregisterCommand(new teamchatCommand("tc", "teamchat"));
         pluginManager.unregisterCommand(new onlinetimeCommand("onlinetime"));
         pluginManager.unregisterCommand(new onlinetimetopCommand("onlinetimetop"));
         pluginManager.unregisterCommand(new joinmeCommand("joinme"));
         pluginManager.unregisterCommand(new staffCommand("staff"));
+        pluginManager.unregisterCommand(new jumpCommand("jump"));
+        pluginManager.unregisterCommand(new pingCommand("ping"));
+        pluginManager.unregisterCommand(new broadcastCommand("broadcast", "br"));
+        pluginManager.unregisterCommand(new serverinfoCommand("serverinfo"));
     }
 
     public static String getTeamPrefix() {
@@ -138,5 +157,13 @@ public class BungeeSystem extends Plugin {
 
     public static String getPartyPrefix() {
         return partyPrefix;
+    }
+
+    public static ServerInfoManager getServerInfoManager() {
+        return serverInfoManager;
+    }
+
+    public static ServerInfoManager getSchedulerController() {
+        return schedulerController;
     }
 }

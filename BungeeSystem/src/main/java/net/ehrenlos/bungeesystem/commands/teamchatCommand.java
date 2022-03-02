@@ -8,8 +8,8 @@ import net.md_5.bungee.api.plugin.Command;
 
 public class teamchatCommand extends Command {
 
-    public teamchatCommand(String name) {
-        super(name);
+    public teamchatCommand(String name, String alias) {
+        super(name, alias);
     }
 
     @Override
