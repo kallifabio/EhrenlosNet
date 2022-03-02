@@ -1,6 +1,8 @@
 package net.ehrenlos.bungeesystem.listeners;
 
 import net.ehrenlos.bungeesystem.BungeeSystem;
+import net.ehrenlos.bungeesystem.manager.BanManager;
+import net.ehrenlos.bungeesystem.manager.MySQLManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerConnectEvent;
@@ -31,7 +33,12 @@ public class ServerConnectListener implements Listener {
                     }
                 }
             }
+        }
 
+        if (BanManager.isBanned(player.getUniqueId().toString())) {
+            BanManager.unban(player.getUniqueId().toString(), player.getName());
+        } else {
+            MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player.getName() + "','" + player.getUniqueId().toString() + "','-2','0')");
         }
     }
 }

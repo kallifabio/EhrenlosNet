@@ -1,14 +1,8 @@
 package net.ehrenlos.bungeesystem;
 
 import net.ehrenlos.bungeesystem.commands.*;
-import net.ehrenlos.bungeesystem.listeners.LogInListener;
-import net.ehrenlos.bungeesystem.listeners.PlayerDisconnectListener;
-import net.ehrenlos.bungeesystem.listeners.ProxyPingListener;
-import net.ehrenlos.bungeesystem.listeners.ServerConnectListener;
-import net.ehrenlos.bungeesystem.manager.CoinsSystemManager;
-import net.ehrenlos.bungeesystem.manager.MySQLManager;
-import net.ehrenlos.bungeesystem.manager.OnlineTimeManager;
-import net.ehrenlos.bungeesystem.manager.ServerInfoManager;
+import net.ehrenlos.bungeesystem.listeners.*;
+import net.ehrenlos.bungeesystem.manager.*;
 import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -33,6 +27,8 @@ public class BungeeSystem extends Plugin {
     private static OnlineTimeManager onlineTimeManager;
     public static ServerInfoManager serverInfoManager = new ServerInfoManager();
     public static ServerInfoManager schedulerController = new ServerInfoManager();
+    private static BanManager banManager;
+    private static MuteManager muteManager;
 
     public static ArrayList<ProxiedPlayer> staff = new ArrayList<>();
     public static ArrayList<ProxiedPlayer> notify = new ArrayList<>();
@@ -74,6 +70,7 @@ public class BungeeSystem extends Plugin {
         pluginManager.registerListener(this, new ServerConnectListener());
         pluginManager.registerListener(this, new LogInListener());
         pluginManager.registerListener(this, new ProxyPingListener());
+        pluginManager.registerListener(this, new ChatListener());
     }
 
     public static BungeeSystem getInstance() {
@@ -111,13 +108,14 @@ public class BungeeSystem extends Plugin {
         pluginManager.unregisterListener(new ServerConnectListener());
         pluginManager.unregisterListener(new LogInListener());
         pluginManager.unregisterListener(new ProxyPingListener());
+        pluginManager.unregisterListener(new ChatListener());
     }
 
     private void registerCommands() {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.registerCommand(this, new coinsCommand("coins"));
-        pluginManager.registerCommand(this, new teamchatCommand("tc", "teamchat"));
+        pluginManager.registerCommand(this, new teamchatCommand("teamchat", "tc"));
         pluginManager.registerCommand(this, new onlinetimeCommand("onlinetime"));
         pluginManager.registerCommand(this, new onlinetimetopCommand("onlinetimetop"));
         pluginManager.registerCommand(this, new joinmeCommand("joinme"));
@@ -136,7 +134,7 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.unregisterCommand(new coinsCommand("coins"));
-        pluginManager.unregisterCommand(new teamchatCommand("tc", "teamchat"));
+        pluginManager.unregisterCommand(new teamchatCommand("teamchat", "tc"));
         pluginManager.unregisterCommand(new onlinetimeCommand("onlinetime"));
         pluginManager.unregisterCommand(new onlinetimetopCommand("onlinetimetop"));
         pluginManager.unregisterCommand(new joinmeCommand("joinme"));
@@ -165,5 +163,13 @@ public class BungeeSystem extends Plugin {
 
     public static ServerInfoManager getSchedulerController() {
         return schedulerController;
+    }
+
+    public static BanManager getBanManager() {
+        return banManager;
+    }
+
+    public static MuteManager getMuteManager() {
+        return muteManager;
     }
 }
