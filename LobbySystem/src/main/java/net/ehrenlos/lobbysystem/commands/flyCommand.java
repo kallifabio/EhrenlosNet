@@ -16,7 +16,7 @@ public class flyCommand implements CommandExecutor {
         }
 
         final Player player = (Player) sender;
-        if (player.hasPermission("lobbysystem.fly.use")) {
+        if (player.hasPermission("lobbysystem.command.fly")) {
             if (cmd.getName().equalsIgnoreCase("fly")) {
                 if (args.length == 0) {
                     if (player.getAllowFlight()) {

@@ -17,7 +17,7 @@ public class setlocationCommand implements CommandExecutor {
         }
 
         final Player player = (Player) sender;
-        if (player.hasPermission("LobbySystem.command.setlocation")) {
+        if (player.hasPermission("lobbysystem.command.setlocation")) {
             if (args.length == 0) {
                 player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns>");
             } else if (args.length == 1) {

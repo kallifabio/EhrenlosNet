@@ -63,14 +63,14 @@ public class OnlineTimeManager {
         try {
             result = MySQLManager.getResult("SELECT * FROM OnlineTime ORDER BY Time DESC LIMIT 10");
             int i = 1;
-            player.sendMessage("§7Onlinezeit §8» §eTop10");
+            player.sendMessage(BungeeSystem.getPrefix() + "§7Onlinezeit §8» §eTop10");
             while (result.next()) {
                 String name = result.getString("Player");
                 int time = result.getInt("Time");
                 boolean isHour = (time >= 60);
                 if (isHour) {
                     time /= 60;
-                    player.sendMessage("§f– §e#%rank% §8» §7%target% §8» §e%time% Stunde(n)".replaceAll("%rank%", String.valueOf(i))
+                    player.sendMessage(BungeeSystem.getPrefix() + "§f– §e#%rank% §8» §7%target% §8» §e%time% Stunde(n)".replaceAll("%rank%", String.valueOf(i))
                             .replaceAll("%target%", name)
                             .replaceAll("%time%", String.valueOf(time)));
                     i++;

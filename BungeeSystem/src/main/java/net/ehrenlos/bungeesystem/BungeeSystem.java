@@ -20,6 +20,9 @@ public class BungeeSystem extends Plugin {
 
     private static String prefix = "§6§lEhrenlosNet §8§l» §r";
     private static String noPerms = "§4Du hast dazu keine Rechte";
+    private static String teamPrefix = "§7[§cTeam§7] §r";
+    private static String clanPrefix = "§7[§cClan§7] §r";
+    private static String partyPrefix = "§7[§cParty§7] §r";
 
     private final MySQLManager mySQLManager = new MySQLManager();
     private static CoinsSystemManager coinsSystemManager;
@@ -123,5 +126,17 @@ public class BungeeSystem extends Plugin {
         pluginManager.unregisterCommand(new onlinetimetopCommand("onlinetimetop"));
         pluginManager.unregisterCommand(new joinmeCommand("joinme"));
         pluginManager.unregisterCommand(new staffCommand("staff"));
+    }
+
+    public static String getTeamPrefix() {
+        return teamPrefix;
+    }
+
+    public static String getClanPrefix() {
+        return clanPrefix;
+    }
+
+    public static String getPartyPrefix() {
+        return partyPrefix;
     }
 }

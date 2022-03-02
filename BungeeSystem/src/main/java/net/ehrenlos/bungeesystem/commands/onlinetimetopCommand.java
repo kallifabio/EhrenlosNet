@@ -24,10 +24,10 @@ public class onlinetimetopCommand extends Command {
             if (args.length == 0) {
                 OnlineTimeManager.sendTop10(player);
             } else {
-                player.sendMessage("§cBenutze: §e%command%".replaceAll("%command%", "/onlinetimetop"));
+                player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/onlinetimetop"));
             }
         } else {
-            player.sendMessage(BungeeSystem.getNoPerms());
+            player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
         }
     }
 }

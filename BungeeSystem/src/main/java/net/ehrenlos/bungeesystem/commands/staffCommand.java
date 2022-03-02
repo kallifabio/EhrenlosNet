@@ -24,15 +24,24 @@ public class staffCommand extends Command {
             if (args.length == 0) {
                 player.sendMessage("§8§m-------§c Team §8§m-------");
                 for (ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                    if (players.hasPermission("bungeesystem.staff.show") || players.hasPermission("bungeesystem.*"))
-                        player.sendMessage("§7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "Admin"));
+                    if (player.hasPermission("lobbysystem.rang.admin")) {
+                        player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§4Admin"));
+                    } else if (player.hasPermission("lobbysystem.rang.developer")) {
+                        player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§bDeveloper"));
+                    } else if (player.hasPermission("lobbysystem.rang.moderator")) {
+                        player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§cModerator"));
+                    } else if (player.hasPermission("lobbysystem.rang.builder")) {
+                        player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§2Builder"));
+                    } else if (player.hasPermission("lobbysystem.rang.supporter")) {
+                        player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§9Supporter"));
+                    }
                 }
                 player.sendMessage("§8§m-------§c Team §8§m-------");
             } else {
-                player.sendMessage("§cBenutze: §e%command%".replaceAll("%command%", "/staff"));
+                player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/staff"));
             }
         } else {
-            player.sendMessage(BungeeSystem.getNoPerms());
+            player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
         }
     }
 }

@@ -18,9 +18,17 @@ public class ServerConnectListener implements Listener {
                 BungeeSystem.staff.add(player);
                 BungeeSystem.notify.add(player);
                 for (ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                    players.sendMessage("§7Das Mitglied §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%",
-                            player.getName()).replaceAll("%prefix%", "Admin"));
-
+                    if (player.hasPermission("lobbysystem.rang.admin")) {
+                        players.sendMessage(BungeeSystem.getTeamPrefix() + "§7Das Mitglied %prefix% §8| §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%", player.getName()).replaceAll("%prefix%", "§4Admin"));
+                    } else if (player.hasPermission("lobbysystem.rang.developer")) {
+                        players.sendMessage(BungeeSystem.getTeamPrefix() + "§7Das Mitglied %prefix% §8| §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%", player.getName()).replaceAll("%prefix%", "§bDeveloper"));
+                    } else if (player.hasPermission("lobbysystem.rang.moderator")) {
+                        players.sendMessage(BungeeSystem.getTeamPrefix() + "§7Das Mitglied %prefix% §8| §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%", player.getName()).replaceAll("%prefix%", "§cModerator"));
+                    } else if (player.hasPermission("lobbysystem.rang.builder")) {
+                        players.sendMessage(BungeeSystem.getTeamPrefix() + "§7Das Mitglied %prefix% §8| §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%", player.getName()).replaceAll("%prefix%", "§2Builder"));
+                    } else if (player.hasPermission("lobbysystem.rang.supporter")) {
+                        players.sendMessage(BungeeSystem.getTeamPrefix() + "§7Das Mitglied %prefix% §8| §e%player% §7ist jetzt §aonline§7!".replaceAll("%player%", player.getName()).replaceAll("%prefix%", "§9Supporter"));
+                    }
                 }
             }
 

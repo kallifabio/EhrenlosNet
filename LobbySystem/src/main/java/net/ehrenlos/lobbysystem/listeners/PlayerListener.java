@@ -5,12 +5,16 @@ import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -158,6 +162,18 @@ public class PlayerListener implements Listener {
             setCoins(player.getName(), 0);
         }
 
+        Firework fwrl = (Firework) LocationManager.getLocation("Spawn").getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
+        FireworkMeta fwrlmeta = fwrl.getFireworkMeta();
+        fwrlmeta.addEffects(FireworkEffect.builder().withColor(Color.RED).with(FireworkEffect.Type.BALL_LARGE).build());
+        fwrlmeta.setPower(1);
+        fwrl.setFireworkMeta(fwrlmeta);
+
+        Firework fwgb = (Firework) LocationManager.getLocation("Spawn").getWorld().spawnEntity(player.getLocation(), EntityType.FIREWORK);
+        FireworkMeta fwgbmeta = fwgb.getFireworkMeta();
+        fwgbmeta.addEffects(FireworkEffect.builder().withColor(Color.GREEN).with(FireworkEffect.Type.BURST).build());
+        fwgbmeta.setPower(1);
+        fwgb.setFireworkMeta(fwgbmeta);
+
         addScoreBoard(player);
     }
 
@@ -179,13 +195,17 @@ public class PlayerListener implements Listener {
         if (player.hasPermission("lobbysystem.rang.admin")) {
             objective.getScore("§8» §4Admin").setScore(5);
         } else if (player.hasPermission("lobbysystem.rang.developer")) {
-            objective.getScore("§8» §3Developer").setScore(5);
+            objective.getScore("§8» §bDeveloper").setScore(5);
         } else if (player.hasPermission("lobbysystem.rang.moderator")) {
             objective.getScore("§8» §cModerator").setScore(5);
         } else if (player.hasPermission("lobbysystem.rang.builder")) {
             objective.getScore("§8» §2Builder").setScore(5);
         } else if (player.hasPermission("lobbysystem.rang.supporter")) {
             objective.getScore("§8» §9Supporter").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.youtuber")) {
+            objective.getScore("§8» §5YouTuber").setScore(5);
+        } else if (player.hasPermission("lobbysystem.rang.jryoutuber")) {
+            objective.getScore("§8» §dJrYouTuber").setScore(5);
         } else {
             objective.getScore("§8» §8Spieler").setScore(5);
         }
@@ -194,8 +214,11 @@ public class PlayerListener implements Listener {
         objective.getScore("§eDeine Coins").setScore(3);
         objective.getScore("§8» §a" + coins).setScore(2);
         objective.getScore("§f").setScore(1);
-        objective.getScore("§eTeamspeak§7/§eWebsite").setScore(0);
-        objective.getScore("§8» §aehrenlos.net").setScore(-1);
+        objective.getScore("§eDeine Spielzeit").setScore(0);
+        objective.getScore("§8» §cIn Arbeit").setScore(-1);
+        objective.getScore("§1").setScore(-2);
+        objective.getScore("§eTeamspeak§7/§eWebsite").setScore(-3);
+        objective.getScore("§8» §aehrenlos.net").setScore(-4);
 
         for (Player all : Bukkit.getOnlinePlayers()) {
             player.setScoreboard(scoreboard);
@@ -205,6 +228,12 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        event.setDeathMessage(null);
+        event.setKeepInventory(true);
     }
 
     @EventHandler

@@ -25,9 +25,9 @@ public class onlinetimeCommand extends Command {
             boolean isHour = (time >= 60);
             if (isHour) {
                 time /= 60;
-                player.sendMessage("§7Du hast eine §eOnlinezeit §7von §e%time% Stunde(n)§7!".replaceAll("%time%", String.valueOf(time)));
+                player.sendMessage(BungeeSystem.getPrefix() + "§7Du hast eine §eOnlinezeit §7von §e%time% Stunde(n)§7!".replaceAll("%time%", String.valueOf(time)));
             } else {
-                player.sendMessage(
+                player.sendMessage(BungeeSystem.getPrefix() +
                         "§7Du hast eine §eOnlinezeit §7von §e%time% Minute(n)§7!".replaceAll("%time%", String.valueOf(time)));
             }
         } else if (args.length == 1) {
@@ -38,20 +38,20 @@ public class onlinetimeCommand extends Command {
                 if (time > 1) {
                     if (isHour) {
                         time /= 60;
-                        player.sendMessage("§7Der Spieler §e%target% §7hat eine §eOnlinezeit §7von §e%time% Stunde(n)§7!"
+                        player.sendMessage(BungeeSystem.getPrefix() + "§7Der Spieler §e%target% §7hat eine §eOnlinezeit §7von §e%time% Stunde(n)§7!"
                                 .replaceAll("%time%", String.valueOf(time)).replaceAll("%target%", args[0]));
                     } else {
-                        player.sendMessage("§7Der Spieler §e%target% §7hat eine §eOnlinezeit §7von §e%time% Minute(n)§7!"
+                        player.sendMessage(BungeeSystem.getPrefix() + "§7Der Spieler §e%target% §7hat eine §eOnlinezeit §7von §e%time% Minute(n)§7!"
                                 .replaceAll("%time%", String.valueOf(time)).replaceAll("%target%", args[0]));
                     }
                 } else {
-                    player.sendMessage("§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", args[0]));
+                    player.sendMessage(BungeeSystem.getPrefix() + "§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", args[0]));
                 }
             } else {
-                player.sendMessage("§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", args[0]));
+                player.sendMessage(BungeeSystem.getPrefix() + "§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", args[0]));
             }
         } else {
-            player.sendMessage("§cBenutze: §e%command%".replaceAll("%command%", "/onlinetime"));
+            player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/onlinetime"));
         }
     }
 

@@ -20,7 +20,7 @@ public class teamchatCommand extends Command {
         }
 
         final ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.teamchat")) {
+        if (player.hasPermission("bungeesystem.command.teamchat")) {
             if (args.length == 0) {
                 player.sendMessage("§cTeamChat §8| §6Verwende§7: /tc <Nachricht>");
             } else {
@@ -30,8 +30,8 @@ public class teamchatCommand extends Command {
                 }
 
                 for (ProxiedPlayer all : ProxyServer.getInstance().getPlayers()) {
-                    if (all.hasPermission("bungeesystem.teamchat"))
-                        all.sendMessage("§cTeamChat §8| §6" + player.getName() + " §7: §e" + message);
+                    if (all.hasPermission("bungeesystem.command.teamchat"))
+                        all.sendMessage("§cTeamChat §8| §6" + player.getName() + " §7» §e" + message);
                 }
             }
         } else {

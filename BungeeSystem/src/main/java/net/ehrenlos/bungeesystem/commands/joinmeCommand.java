@@ -30,23 +30,35 @@ public class joinmeCommand extends Command {
         }
 
         final ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.joinme") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.command.joinme") || player.hasPermission("bungeesystem.*")) {
             if (args.length == 0) {
                 if (!this.cooldown.contains(player)) {
-                    TextComponent message = new TextComponent("§a[Klicke hier zum verbinden]");
+                    TextComponent message = new TextComponent(BungeeSystem.getPrefix() + "§a[Klicke hier zum verbinden]");
                     message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/server " + player.getServer().getInfo().getName()));
-                    String msg = "§7Der Spieler %prefix% §8| §e%player% §7spielt auf §e%server%§7!";
+                    String msg = BungeeSystem.getPrefix() + "§7Der Spieler %prefix% §8| §e%player% §7spielt auf §e%server%§7!";
                     msg = msg.replaceAll("%server%", player.getServer().getInfo().getName());
                     msg = msg.replaceAll("%player%", player.getName());
-                    if (player.hasPermission("lobbysystem.rang.admin") || player.hasPermission("*")) {
+                    if (player.hasPermission("lobbysystem.rang.admin")) {
                         msg = msg.replaceAll("%prefix%", "§4Admin");
+                    } else if (player.hasPermission("lobbysystem.rang.developer")) {
+                        msg = msg.replaceAll("%prefix%", "§bDeveloper");
+                    } else if (player.hasPermission("lobbysystem.rang.moderator")) {
+                        msg = msg.replaceAll("%prefix%", "§cModerator");
+                    } else if (player.hasPermission("lobbysystem.rang.builder")) {
+                        msg = msg.replaceAll("%prefix%", "§2Builder");
+                    } else if (player.hasPermission("lobbysystem.rang.supporter")) {
+                        msg = msg.replaceAll("%prefix%", "§9Supporter");
+                    } else if (player.hasPermission("lobbysystem.rang.youtuber")) {
+                        msg = msg.replaceAll("%prefix%", "§5YouTuber");
+                    } else if (player.hasPermission("lobbysystem.rang.jryoutuber")) {
+                        msg = msg.replaceAll("%prefix%", "§dJrYouTuber");
                     }
 
                     ProxyServer.getInstance().broadcast("");
                     ProxyServer.getInstance().broadcast(msg);
                     ProxyServer.getInstance().broadcast(message);
                     ProxyServer.getInstance().broadcast("");
-                    if (player.hasPermission("bungeesystem.joinme.nodelay") || player.hasPermission("bungeesystem.*"))
+                    if (player.hasPermission("bungeesystem.command.joinme.nodelay") || player.hasPermission("bungeesystem.*"))
                         return;
                     this.cooldown.add(player);
                     ProxyServer.getInstance().getScheduler().schedule(BungeeSystem.getInstance(), () -> {
@@ -54,13 +66,13 @@ public class joinmeCommand extends Command {
                             this.cooldown.remove(player);
                     }, 60, TimeUnit.SECONDS);
                 } else {
-                    player.sendMessage("§7Bitte §ewarte §7einen Moment!");
+                    player.sendMessage(BungeeSystem.getPrefix() + "§7Bitte §ewarte §7einen Moment!");
                 }
             } else {
-                player.sendMessage("§cBenutze: §e%command%".replaceAll("%command%", "/joinme"));
+                player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/joinme"));
             }
         } else {
-            player.sendMessage(BungeeSystem.getNoPerms());
+            player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());
         }
     }
 }

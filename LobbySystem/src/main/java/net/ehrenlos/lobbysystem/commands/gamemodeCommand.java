@@ -18,7 +18,7 @@ public class gamemodeCommand implements CommandExecutor {
         }
 
         final Player player = (Player) sender;
-        if (player.hasPermission("lobbysystem.gamemode.use")) {
+        if (player.hasPermission("lobbysystem.command.gamemode")) {
             if (cmd.getName().equalsIgnoreCase("gm")) {
                 if (args.length == 0) {
                     player.sendMessage(LobbySystem.getPrefix() + "§cBitte benutze §6/gm <0, 1, 2, 3> <Name>");
