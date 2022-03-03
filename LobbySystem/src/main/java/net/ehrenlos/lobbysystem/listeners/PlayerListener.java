@@ -1,6 +1,5 @@
 package net.ehrenlos.lobbysystem.listeners;
 
-import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
@@ -141,6 +140,8 @@ public class PlayerListener implements Listener {
 
         player.getInventory().clear();
         player.getInventory().setItem(0, new ItemManager(Material.COMPASS).setDisplayName("§6Navigator §8| §eRechtsklick").build());
+        player.getInventory().setItem(2, new ItemManager(Material.BARRIER).setDisplayName("§cDu hast derzeit kein Gadget ausgewählt").build());
+        player.getInventory().setItem(4, new ItemManager(Material.CHEST).setDisplayName("§6Gadget §8| §eRechtsklick").build());
         player.getInventory().setItem(6, new ItemManager(Material.BLAZE_ROD).setDisplayName("§6PlayerHider §8| §eRechtsklick").build());
         player.getInventory().setItem(8, new ItemManager(Material.LEGACY_WATCH).setDisplayName("§6LobbySwitcher §8| §eRechtsklick").build());
 
@@ -148,6 +149,8 @@ public class PlayerListener implements Listener {
         player.setHealth(20D);
         player.setFoodLevel(20);
         player.setPlayerWeather(WeatherType.CLEAR);
+
+        player.sendTitle("§7Willkommen auf §6ehrenlos.net§e", player.getName(), 25, 30, 25);
 
         Bukkit.getWorlds().forEach(current -> {
             current.setPVP(false);

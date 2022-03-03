@@ -1,6 +1,5 @@
 package net.ehrenlos.bungeesystem.listeners;
 
-import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
 import net.ehrenlos.bungeesystem.BungeeSystem;
 import net.ehrenlos.bungeesystem.manager.BanManager;
 import net.ehrenlos.bungeesystem.manager.MuteManager;

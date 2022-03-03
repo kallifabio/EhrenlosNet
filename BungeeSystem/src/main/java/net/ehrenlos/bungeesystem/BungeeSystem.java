@@ -7,7 +7,6 @@ import net.md_5.bungee.BungeeCord;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
-import sun.rmi.runtime.Log;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -124,6 +123,7 @@ public class BungeeSystem extends Plugin {
         pluginManager.registerCommand(this, new pingCommand("ping"));
         pluginManager.registerCommand(this, new broadcastCommand("broadcast", "br"));
         pluginManager.registerCommand(this, new serverinfoCommand("serverinfo"));
+        pluginManager.registerCommand(this, new bungeehelp("bungeehelp"));
     }
 
     public MySQLManager getMySQLManager() {
@@ -143,6 +143,7 @@ public class BungeeSystem extends Plugin {
         pluginManager.unregisterCommand(new pingCommand("ping"));
         pluginManager.unregisterCommand(new broadcastCommand("broadcast", "br"));
         pluginManager.unregisterCommand(new serverinfoCommand("serverinfo"));
+        pluginManager.unregisterCommand(new bungeehelp("bungeehelp"));
     }
 
     public static String getTeamPrefix() {

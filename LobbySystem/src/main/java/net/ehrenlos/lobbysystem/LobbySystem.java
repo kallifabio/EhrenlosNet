@@ -2,10 +2,9 @@ package net.ehrenlos.lobbysystem;
 
 import net.ehrenlos.lobbysystem.commands.flyCommand;
 import net.ehrenlos.lobbysystem.commands.gamemodeCommand;
+import net.ehrenlos.lobbysystem.commands.lobbyhelpCommand;
 import net.ehrenlos.lobbysystem.commands.setlocationCommand;
-import net.ehrenlos.lobbysystem.inventorys.LobbySwitcherInventory;
-import net.ehrenlos.lobbysystem.inventorys.NavigatorInventory;
-import net.ehrenlos.lobbysystem.inventorys.PlayerHiderInventory;
+import net.ehrenlos.lobbysystem.inventorys.*;
 import net.ehrenlos.lobbysystem.listeners.EntityListener;
 import net.ehrenlos.lobbysystem.listeners.ItemListener;
 import net.ehrenlos.lobbysystem.listeners.PlayerListener;
@@ -57,6 +56,7 @@ public class LobbySystem extends JavaPlugin {
         getCommand("setlocation").setExecutor(new setlocationCommand());
         getCommand("gm").setExecutor(new gamemodeCommand());
         getCommand("fly").setExecutor(new flyCommand());
+        getCommand("lobbyhelp").setExecutor(new lobbyhelpCommand());
     }
 
     private void registerEvents() {
@@ -73,6 +73,8 @@ public class LobbySystem extends JavaPlugin {
         pluginManager.registerEvents(new NavigatorInventory(), this);
         pluginManager.registerEvents(new PlayerHiderInventory(), this);
         pluginManager.registerEvents(new LobbySwitcherInventory(), this);
+        pluginManager.registerEvents(new GadgetInventory(), this);
+        pluginManager.registerEvents(new HeadsInventory(), this);
     }
 
     @Override
