@@ -124,6 +124,16 @@ public class BungeeSystem extends Plugin {
         pluginManager.registerCommand(this, new broadcastCommand("broadcast", "br"));
         pluginManager.registerCommand(this, new serverinfoCommand("serverinfo"));
         pluginManager.registerCommand(this, new bungeehelp("bungeehelp"));
+        pluginManager.registerCommand(this, new banCommand("ban"));
+        pluginManager.registerCommand(this, new banhelpCommand("banhelp"));
+        pluginManager.registerCommand(this, new checkCommand("check"));
+        pluginManager.registerCommand(this, new kickCommand("kick"));
+        pluginManager.registerCommand(this, new muteCommand("mute"));
+        pluginManager.registerCommand(this, new mutehelpCommand("mutehelp"));
+        pluginManager.registerCommand(this, new tempbanCommand("tempban"));
+        pluginManager.registerCommand(this, new tempmuteCommand("tempmute"));
+        pluginManager.registerCommand(this, new unbanCommand("unban"));
+        pluginManager.registerCommand(this, new unmuteCommand("unmute"));
     }
 
     public MySQLManager getMySQLManager() {
@@ -144,6 +154,16 @@ public class BungeeSystem extends Plugin {
         pluginManager.unregisterCommand(new broadcastCommand("broadcast", "br"));
         pluginManager.unregisterCommand(new serverinfoCommand("serverinfo"));
         pluginManager.unregisterCommand(new bungeehelp("bungeehelp"));
+        pluginManager.unregisterCommand(new banCommand("ban"));
+        pluginManager.unregisterCommand(new banhelpCommand("banhelp"));
+        pluginManager.unregisterCommand(new checkCommand("check"));
+        pluginManager.unregisterCommand(new kickCommand("kick"));
+        pluginManager.unregisterCommand(new muteCommand("mute"));
+        pluginManager.unregisterCommand(new mutehelpCommand("mutehelp"));
+        pluginManager.unregisterCommand(new tempbanCommand("tempban"));
+        pluginManager.unregisterCommand(new tempmuteCommand("tempmute"));
+        pluginManager.unregisterCommand(new unbanCommand("unban"));
+        pluginManager.unregisterCommand(new unmuteCommand("unmute"));
     }
 
     public static String getTeamPrefix() {
