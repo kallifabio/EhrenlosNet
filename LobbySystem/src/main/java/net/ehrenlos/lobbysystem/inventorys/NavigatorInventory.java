@@ -1,7 +1,5 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import net.ehrenlos.lobbysystem.LobbySystem;
 import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
@@ -15,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -46,6 +43,8 @@ public class NavigatorInventory implements Listener {
         navigatorInventory.setItem(8, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Team").setLore("§7Teleportiere dich zum Team").build());
         navigatorInventory.setItem(4, new ItemManager(Material.GREEN_STAINED_GLASS).setDisplayName("§e● §6Jump And Runs").setLore("§7Teleportiere dich zu den Jump And Runs").build());
         navigatorInventory.setItem(0, new ItemManager(Material.GRASS_BLOCK).setDisplayName("§e● §6Bauserver").setLore("§7Teleportiere dich zum Bauserver").build());
+        navigatorInventory.setItem(20, new ItemManager(Material.OAK_WOOD).setDisplayName("§e● §6FreeBuild").setLore("§7Teleportiere dich zu FreeBuild").build());
+        navigatorInventory.setItem(24, new ItemManager(Material.QUARTZ_BLOCK).setDisplayName("§e● §6CityBuild").setLore("§7Teleportiere dich zu CityBuild").build());
 
         for (int i = 0; i < navigatorInventory.getSize(); i++) {
             if (navigatorInventory.getItem(i) == null) {
@@ -96,6 +95,18 @@ public class NavigatorInventory implements Listener {
                         player.sendMessage(LobbySystem.getPrefix() + LobbySystem.getNoPerms());
                     }
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
+                    player.closeInventory();
+                    break;
+                case "§e● §6FreeBuild":
+                    player.teleport(LocationManager.getLocation("FreeBuild"));
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
+                    player.sendTitle("§d§lTeleport", "§8» §aFreeBuild", 25, 25, 25);
+                    player.closeInventory();
+                    break;
+                case "§e● §6CityBuild":
+                    player.teleport(LocationManager.getLocation("CityBuild"));
+                    player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
+                    player.sendTitle("§d§lTeleport", "§8» §aCityBuild", 25, 25, 25);
                     player.closeInventory();
                     break;
             }
