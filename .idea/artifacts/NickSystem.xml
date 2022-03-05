@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="NickSystem">
+    <output-path>$PROJECT_DIR$/../../Plugin Output/EhrenlosNet/NickSystem</output-path>
+    <root id="archive" name="NickSystem.jar">
+      <element id="module-output" name="NickSystem" />
+    </root>
+  </artifact>
+</component>

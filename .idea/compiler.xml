@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="BungeeSystem" />
+        <module name="NickSystem" />
         <module name="JumpAndRun" />
         <module name="LobbySystem" />
+        <module name="BungeeSystem" />
       </profile>
     </annotationProcessing>
   </component>

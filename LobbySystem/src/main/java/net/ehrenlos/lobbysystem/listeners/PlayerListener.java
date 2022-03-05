@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -21,11 +22,14 @@ import org.bukkit.scoreboard.Scoreboard;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class PlayerListener implements Listener {
 
     static PreparedStatement statement;
     static ResultSet result;
+    Player player;
+    //</editor-fold>
 
     /**
      * Register Player, Amount
@@ -127,9 +131,6 @@ public class PlayerListener implements Listener {
             }
         }
     }
-    //</editor-fold>
-
-    Player player;
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -243,5 +244,40 @@ public class PlayerListener implements Listener {
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         event.setCancelled(true);
         event.setFoodLevel(20);
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        if (Objects.requireNonNull(player.getInventory().getBoots()).getType() == Material.LEATHER_BOOTS) {
+            if (Objects.requireNonNull(player.getInventory().getBoots().getItemMeta()).getDisplayName().equalsIgnoreCase("§aHerzen")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.HEART, player.getLocation(), 10);
+                }
+            } else if (player.getInventory().getBoots().getItemMeta().getDisplayName().equalsIgnoreCase("§aFeuer")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.FLAME, player.getLocation(), 10);
+                }
+            } else if (player.getInventory().getBoots().getItemMeta().getDisplayName().equalsIgnoreCase("§aWasser")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.WATER_SPLASH, player.getLocation(), 10);
+                }
+            } else if (player.getInventory().getBoots().getItemMeta().getDisplayName().equalsIgnoreCase("§aRauch")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.SMOKE_NORMAL, player.getLocation(), 10);
+                }
+            } else if (player.getInventory().getBoots().getItemMeta().getDisplayName().equalsIgnoreCase("§aZauber")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.SPELL_WITCH, player.getLocation(), 10);
+                }
+            } else if (player.getInventory().getBoots().getItemMeta().getDisplayName().equalsIgnoreCase("§aWolken")) {
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    all.spawnParticle(Particle.CLOUD, player.getLocation(), 10);
+                }
+            } else {
+                event.setCancelled(true);
+            }
+        } else {
+            event.setCancelled(true);
+        }
     }
 }

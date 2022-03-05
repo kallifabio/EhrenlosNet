@@ -27,7 +27,6 @@ public class HeadsInventory implements Listener {
         final Player player = event.getPlayer();
         if (event.getItem() == null) return;
         if (event.getItem().getItemMeta().getDisplayName().equals("§e● §6Köpfe")) {
-            player.sendMessage(LobbySystem.getPrefix() + "§cKöpfe werden geladen");
             player.openInventory(headsInventory);
             event.setCancelled(true);
         }

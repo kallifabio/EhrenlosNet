@@ -75,6 +75,7 @@ public class LobbySystem extends JavaPlugin {
         pluginManager.registerEvents(new LobbySwitcherInventory(), this);
         pluginManager.registerEvents(new GadgetInventory(), this);
         pluginManager.registerEvents(new HeadsInventory(), this);
+        pluginManager.registerEvents(new ParticleInventory(), this);
     }
 
     @Override

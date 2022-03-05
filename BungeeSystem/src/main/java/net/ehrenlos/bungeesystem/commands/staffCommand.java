@@ -20,19 +20,19 @@ public class staffCommand extends Command {
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.staff") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.staff")) {
             if (args.length == 0) {
                 player.sendMessage("§8§m-------§c Team §8§m-------");
                 for (ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                    if (player.hasPermission("lobbysystem.rang.admin")) {
+                    if (player.hasPermission("lobbysystem.rang.admin") && player.hasPermission("bungeesystem.staff")) {
                         player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§4Admin"));
-                    } else if (player.hasPermission("lobbysystem.rang.developer")) {
+                    } else if (player.hasPermission("lobbysystem.rang.developer") && player.hasPermission("bungeesystem.staff")) {
                         player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§bDeveloper"));
-                    } else if (player.hasPermission("lobbysystem.rang.moderator")) {
+                    } else if (player.hasPermission("lobbysystem.rang.moderator") && player.hasPermission("bungeesystem.staff")) {
                         player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§cModerator"));
-                    } else if (player.hasPermission("lobbysystem.rang.builder")) {
+                    } else if (player.hasPermission("lobbysystem.rang.builder") && player.hasPermission("bungeesystem.staff")) {
                         player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§2Builder"));
-                    } else if (player.hasPermission("lobbysystem.rang.supporter")) {
+                    } else if (player.hasPermission("lobbysystem.rang.supporter") && player.hasPermission("bungeesystem.staff")) {
                         player.sendMessage("%prefix% §8| §7%player% §8» §e%server%".replaceAll("%player%", players.getName()).replaceAll("%server%", players.getServer().getInfo().getName()).replaceAll("%prefix%", "§9Supporter"));
                     }
                 }

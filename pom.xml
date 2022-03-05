@@ -12,6 +12,7 @@
         <module>LobbySystem</module>
         <module>BungeeSystem</module>
         <module>JumpAndRun</module>
+        <module>NickSystem</module>
     </modules>
 
     <properties>
