@@ -8,3 +8,4 @@
 ### [LobbySystem](https://github.com/kallifabio/EhrenlosNet/tree/master/LobbySystem)
 ### [BungeeSystem](https://github.com/kallifabio/EhrenlosNet/tree/master/BungeeSystem)
 ### [Jump And Run](https://github.com/kallifabio/EhrenlosNet/tree/master/JumpAndRun)
+### [NickSystem](https://github.com/kallifabio/EhrenlosNet/tree/master/NickSystem)
