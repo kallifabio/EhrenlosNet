@@ -6,6 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class BanManager {
 
@@ -40,7 +41,7 @@ public class BanManager {
         if (target != null) {
             String message = "§6§lEhrenlosNet %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
             message = message.replaceAll("%newline%", "\n");
-            message = message.replaceAll("%time%", getRemainingTime(target.getName()));
+            //message = message.replaceAll("%time%", getRemainingTime(getUUID(uuid)));
             message = message.replaceAll("%reason%", getReason(target.getName()));
             message = message.replaceAll("%staff%", getTeamBanned(target.getName()));
             target.disconnect(message);
@@ -126,8 +127,8 @@ public class BanManager {
         return "No Reason";
     }
 
-    public static Long getEnd(String name) {
-        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player ='" + name + "'");
+    public static Long getEnd(UUID uuid) {
+        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE UUID ='" + uuid.toString() + "'");
         try {
             if (result.next())
                 return Long.valueOf(result.getLong("End"));
@@ -137,9 +138,9 @@ public class BanManager {
         return null;
     }
 
-    public static String getRemainingTime(String name) {
+    public static String getRemainingTime(UUID uuid) {
         long current = System.currentTimeMillis();
-        long end = getEnd(name).longValue();
+        long end = getEnd(uuid).longValue();
         if (end == -1L)
             return "§ePERMANENT";
         long millis = end - current;

@@ -48,7 +48,6 @@ public class BungeeSystem extends Plugin {
         }
 
         ServerInfoManager.startScheduler();
-        OnlineTimeManager.startOnlineTimeTracking();
     }
 
     @Override

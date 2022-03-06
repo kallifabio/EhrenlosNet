@@ -5,12 +5,16 @@ import net.ehrenlos.bungeesystem.utils.UUIDFetcher;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class OnlineTimeManager {
+
+    static PreparedStatement statement;
+    static ResultSet result;
 
     public static void startOnlineTimeTracking() {
         ProxyServer.getInstance().getScheduler().schedule(BungeeSystem.getInstance(), () -> {
@@ -26,9 +30,18 @@ public class OnlineTimeManager {
 
     public static void updateTime(final UUID uuid) {
         if (isRegistered(uuid)) {
-            MySQLManager.update("UPDATE OnlineTime SET Time = '" + (getTime(uuid) + 1) + "' WHERE UUID = '" + uuid.toString() + "'");
+            MySQLManager.update("UPDATE OnlineTime SET `Time`=" + (getTime(uuid) + 1) + "WHERE `UUID`=" + uuid.toString());
         } else {
-            MySQLManager.update("INSERT INTO OnlineTime (UUID, Time) VALUES ('" + uuid.toString() + "', '1')");
+            PreparedStatement preparedStatement = MySQLManager.getStatement("INSERT INTO OnlineTime (UUID, Time) VALUES (?, ?)");
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.setString(1, uuid.toString());
+                    preparedStatement.setInt(2, 0);
+                    preparedStatement.execute();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 

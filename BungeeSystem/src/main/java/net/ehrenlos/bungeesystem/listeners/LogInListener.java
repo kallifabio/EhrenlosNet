@@ -37,11 +37,11 @@ public class LogInListener implements Listener {
             }
             if (BanManager.isBanned(uuid.toString(), player)) {
                 final long current = System.currentTimeMillis();
-                final long end = BanManager.getEnd(uuid.toString());
+                final long end = BanManager.getEnd(uuid);
                 if (current < end || end == -1L) {
                     String message = "§6§lEhrenlosNet %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
                     message = message.replaceAll("%newline%", "\n");
-                    message = message.replaceAll("%time%", BanManager.getRemainingTime(BanManager.getUUID(player)));
+                    //message = message.replaceAll("%time%", BanManager.getRemainingTime(BanManager.getUUID(uuid)));
                     message = message.replaceAll("%reason%", BanManager.getReason(BanManager.getUUID(player)));
                     message = message.replaceAll("%staff%", BanManager.getTeamBanned(BanManager.getUUID(player)));
                     event.setCancelled(true);

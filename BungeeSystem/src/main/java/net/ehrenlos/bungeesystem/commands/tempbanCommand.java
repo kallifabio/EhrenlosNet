@@ -53,13 +53,13 @@ public class tempbanCommand extends Command {
                         final long seconds;
                         seconds = value * unit.getToSeconds();
                         BanManager.ban(sender.getName(), BanManager.getUUID(target), target, reason, seconds);
-                        sender.sendMessage("§aDu hast §e%target% §afür §e%reason% §e%time% §avom Netzwerk gebannt!".replaceAll("%target%", target).replaceAll("%reason%", reason).replaceAll("%time%", "§e" + BanManager.getRemainingTime(BanManager.getUUID(target))));
+                        //sender.sendMessage("§aDu hast §e%target% §afür §e%reason% §e%time% §avom Netzwerk gebannt!".replaceAll("%target%", target).replaceAll("%reason%", reason).replaceAll("%time%", "§e" + BanManager.getRemainingTime(BanManager.getUUID(target))));
                     } else {
                         sender.sendMessage(BungeeSystem.getPrefix() + "§cThe unit §e<TimeUnit> §cdoes not exist!");
                     }
                     for (final ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
                         if ((players.hasPermission("bungeesystem.staffnotify") || players.hasPermission("bungeesystem.*"))) {
-                            players.sendMessage("§7Der Spieler §e%player% §7wurde von §e%staff% §7für §e%reason% §e%time% §7vom Netzwerk gebannt!".replaceAll("%player%", target).replaceAll("%staff%", sender.getName()).replaceAll("%reason%", reason).replaceAll("%time%", "§e" + BanManager.getRemainingTime(BanManager.getUUID(target))));
+                            //players.sendMessage("§7Der Spieler §e%player% §7wurde von §e%staff% §7für §e%reason% §e%time% §7vom Netzwerk gebannt!".replaceAll("%player%", target).replaceAll("%staff%", sender.getName()).replaceAll("%reason%", reason).replaceAll("%time%", "§e" + BanManager.getRemainingTime(BanManager.getUUID(target))));
                         }
                     }
                 } else {
