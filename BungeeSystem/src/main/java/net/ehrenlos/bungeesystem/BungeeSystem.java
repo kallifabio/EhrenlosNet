@@ -47,8 +47,8 @@ public class BungeeSystem extends Plugin {
             e.printStackTrace();
         }
 
-        OnlineTimeManager.startOnlineTimeTracking();
         ServerInfoManager.startScheduler();
+        OnlineTimeManager.startOnlineTimeTracking();
     }
 
     @Override
@@ -114,14 +114,14 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.registerCommand(this, new coinsCommand("coins"));
-        pluginManager.registerCommand(this, new teamchatCommand("teamchat", "tc"));
+        pluginManager.registerCommand(this, new teamchatCommand("tc"));
         pluginManager.registerCommand(this, new onlinetimeCommand("onlinetime"));
         pluginManager.registerCommand(this, new onlinetimetopCommand("onlinetimetop"));
         pluginManager.registerCommand(this, new joinmeCommand("joinme"));
         pluginManager.registerCommand(this, new staffCommand("staff"));
         pluginManager.registerCommand(this, new jumpCommand("jump"));
         pluginManager.registerCommand(this, new pingCommand("ping"));
-        pluginManager.registerCommand(this, new broadcastCommand("broadcast", "br"));
+        pluginManager.registerCommand(this, new broadcastCommand("broadcast"));
         pluginManager.registerCommand(this, new serverinfoCommand("serverinfo"));
         pluginManager.registerCommand(this, new bungeehelp("bungeehelp"));
         pluginManager.registerCommand(this, new banCommand("ban"));
@@ -144,14 +144,14 @@ public class BungeeSystem extends Plugin {
         PluginManager pluginManager = BungeeCord.getInstance().getPluginManager();
 
         pluginManager.unregisterCommand(new coinsCommand("coins"));
-        pluginManager.unregisterCommand(new teamchatCommand("teamchat", "tc"));
+        pluginManager.unregisterCommand(new teamchatCommand("tc"));
         pluginManager.unregisterCommand(new onlinetimeCommand("onlinetime"));
         pluginManager.unregisterCommand(new onlinetimetopCommand("onlinetimetop"));
         pluginManager.unregisterCommand(new joinmeCommand("joinme"));
         pluginManager.unregisterCommand(new staffCommand("staff"));
         pluginManager.unregisterCommand(new jumpCommand("jump"));
         pluginManager.unregisterCommand(new pingCommand("ping"));
-        pluginManager.unregisterCommand(new broadcastCommand("broadcast", "br"));
+        pluginManager.unregisterCommand(new broadcastCommand("broadcast"));
         pluginManager.unregisterCommand(new serverinfoCommand("serverinfo"));
         pluginManager.unregisterCommand(new bungeehelp("bungeehelp"));
         pluginManager.unregisterCommand(new banCommand("ban"));

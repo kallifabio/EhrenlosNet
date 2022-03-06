@@ -38,7 +38,7 @@ public class ServerConnectListener implements Listener {
         if (BanManager.isBanned(player.getUniqueId().toString())) {
             BanManager.unban(player.getUniqueId().toString(), player.getName());
         } else {
-            MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player.getName() + "','" + player.getUniqueId().toString() + "','-2','0')");
+            MySQLManager.update("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player.getName() + "','" + player.getUniqueId().toString() + "','-2','0')");
         }
     }
 }

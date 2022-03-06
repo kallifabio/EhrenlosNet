@@ -19,7 +19,7 @@ public class ChatListener implements Listener {
                 if (current < end || end == -1L) {
                     event.setCancelled(true);
                     player.sendMessage("");
-                    player.sendMessage("§bkallifabio.net");
+                    player.sendMessage("§6§lEhrenlosNet");
                     player.sendMessage("§cDu wurdest auf dem Netzwerk §egemutet!");
                     player.sendMessage("§7Dauer §8» §e%time%".replaceAll("%time%", MuteManager.getRemainingTime(player.getUniqueId().toString())));
                     player.sendMessage("§7Grund §8» §e%reason%".replaceAll("%reason%", MuteManager.getReason(player.getUniqueId().toString())));

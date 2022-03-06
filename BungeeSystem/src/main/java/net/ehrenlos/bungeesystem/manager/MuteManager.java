@@ -1,24 +1,20 @@
 package net.ehrenlos.bungeesystem.manager;
 
-import net.ehrenlos.bungeesystem.BungeeSystem;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MuteManager {
 
-    static PreparedStatement statement;
-    static ResultSet result;
-
-    public static boolean playerExistsMuted(String uuid) {
+    public static boolean playerExistsMuted(final String uuid) {
         try {
-            result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE UUID= '" + uuid + "'");
-            if (result.next())
-                return (result.getString("UUID") != null);
-            result.close();
+            final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE UUID= '" + uuid + "'");
+            if (rs.next()) {
+                return rs.getString("UUID") != null;
+            }
+            rs.close();
             return false;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -26,51 +22,45 @@ public class MuteManager {
         }
     }
 
-    public static void mute(String team, String uuid, String player, String reason, long seconds) {
+    public static void mute(final String team, final String uuid, final String player, final String reason, final long seconds) {
         long end = 0L;
         if (seconds == -1L) {
             end = -1L;
         } else {
-            long current = System.currentTimeMillis();
-            long millis = seconds * 1000L;
+            final long current = System.currentTimeMillis();
+            final long millis = seconds * 1000L;
             end = current + millis;
         }
         removemute(uuid);
-        MySQLManager.getStatement("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('1','" + team + "','" +
-                player + "','" + uuid + "','" + end + "','" + reason + "')");
-        ProxiedPlayer target = ProxyServer.getInstance().getPlayer(player);
+        MySQLManager.update("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('1','" + team + "','" + player + "','" + uuid + "','" + end + "','" + reason + "')");
+        final ProxiedPlayer target = ProxyServer.getInstance().getPlayer(player);
         if (target != null) {
-            target.sendMessage("");
-            target.sendMessage("§bkallifabio.net");
+            target.sendMessage("§6§lEhrenlosNet");
             target.sendMessage("§cDu wurdest auf dem Netzwerk §egemutet!");
-            target.sendMessage("§7Dauer §8» §e%time%".replaceAll("%time%",
-                    getRemainingTime(target.getUniqueId().toString())));
-            target.sendMessage("§7Grund §8» §e%reason%".replaceAll("%reason%",
-                    getReason(target.getUniqueId().toString())));
-            target.sendMessage("§7Gemutet von §8» §e%staff%".replaceAll("%staff%",
-                    getTeamMuted(getUUID(target.getName()))));
+            target.sendMessage("§7Dauer §8» §e%time%".replaceAll("%time%", getRemainingTime(target.getUniqueId().toString())));
+            target.sendMessage("§7Grund §8» §e%reason%".replaceAll("%reason%", getReason(target.getUniqueId().toString())));
+            target.sendMessage("§7Gemutet von §8» §e%staff%".replaceAll("%staff%", getTeamMuted(getUUID(target.getName()))));
             target.sendMessage("");
         }
     }
 
-    public static void unmute(String uuid, String player) {
-        MySQLManager.getStatement("DELETE FROM MutedPlayers WHERE UUID='" + uuid + "'");
-        MySQLManager.getStatement("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player +
-                "','" + uuid + "','-2','0')");
+    public static void unmute(final String uuid, final String player) {
+        MySQLManager.update("DELETE FROM MutedPlayers WHERE UUID='" + uuid + "'");
+        MySQLManager.update("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player + "','" + uuid + "','-2','0')");
     }
 
-    public static void removemute(String uuid) {
-        MySQLManager.getStatement("DELETE FROM MutedPlayers WHERE UUID='" + uuid + "'");
+    public static void removemute(final String uuid) {
+        MySQLManager.update("DELETE FROM MutedPlayers WHERE UUID='" + uuid + "'");
     }
 
-    public static Boolean isMuted(String uuid, String player) {
+    public static Boolean isMuted(final String uuid, final String player) {
         Boolean muted = null;
         try {
-            result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE UUID= '" + uuid + "'");
-            if (result.next() && Integer.valueOf(result.getInt("Muted")).intValue() == 0) {
-                muted = Boolean.valueOf(false);
+            final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE UUID= '" + uuid + "'");
+            if (rs.next() && rs.getInt("Muted") == 0) {
+                muted = false;
             } else {
-                muted = Boolean.valueOf(true);
+                muted = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,65 +68,70 @@ public class MuteManager {
         return muted;
     }
 
-    public static boolean isMuted(String uuid) {
-        result = MySQLManager.getResult("SELECT End FROM MutedPlayers WHERE UUID='" + uuid + "'");
+    public static boolean isMuted(final String uuid) {
+        final ResultSet rs = MySQLManager.getResults("SELECT End FROM MutedPlayers WHERE UUID='" + uuid + "'");
         try {
-            return result.next();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public static String getUUID(String player) {
-        result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE Player='" + player + "'");
+    public static String getUUID(final String player) {
+        final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE Player='" + player + "'");
         try {
-            if (result.next())
-                return result.getString("UUID");
+            if (rs.next()) {
+                return rs.getString("UUID");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "No UUID";
     }
 
-    public static String getTeamMuted(String name) {
-        result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE UUID='" + name + "'");
+    public static String getTeamMuted(final String name) {
+        final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE UUID='" + name + "'");
         try {
-            if (result.next())
-                return result.getString("Staff");
+            if (rs.next()) {
+                return rs.getString("Staff");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    public static String getReason(String uuid) {
-        result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE UUID='" + uuid + "'");
+    public static String getReason(final String uuid) {
+        final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE UUID='" + uuid + "'");
         try {
-            if (result.next())
-                return result.getString("Reason");
+            if (rs.next()) {
+                return rs.getString("Reason");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "";
     }
 
-    public static Long getEnd(String uuid) {
-        result = MySQLManager.getResult("SELECT * FROM MutedPlayers WHERE UUID='" + uuid + "'");
+    public static Long getEnd(final String uuid) {
+        final ResultSet rs = MySQLManager.getResults("SELECT * FROM MutedPlayers WHERE UUID='" + uuid + "'");
         try {
-            if (result.next())
-                return Long.valueOf(result.getLong("End"));
+            if (rs.next()) {
+                return rs.getLong("End");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String getRemainingTime(String uuid) {
-        long current = System.currentTimeMillis();
-        long end = getEnd(uuid).longValue();
-        if (end == -1L)
+    public static String getRemainingTime(final String uuid) {
+        final long current = System.currentTimeMillis();
+        final long end = getEnd(uuid);
+        if (end == -1L) {
             return "§ePERMANENT";
+        }
         long millis = end - current;
         long seconds = 0L;
         long minuts = 0L;
@@ -145,26 +140,24 @@ public class MuteManager {
         long week = 0L;
         while (millis > 1000L) {
             millis -= 1000L;
-            seconds++;
+            ++seconds;
         }
         while (seconds > 60L) {
             seconds -= 60L;
-            minuts++;
+            ++minuts;
         }
         while (minuts > 60L) {
             minuts -= 60L;
-            hours++;
+            ++hours;
         }
         while (hours > 24L) {
             hours -= 24L;
-            days++;
+            ++days;
         }
         while (days > 7L) {
             days -= 7L;
-            week++;
+            ++week;
         }
         return "§e" + week + " " + "Woche(n)" + " " + days + " " + "Tag(e)" + " " + hours + " " + "Stunde(n)" + " " + minuts + " " + "Minute(n)" + " " + seconds + " " + "Sekunde(n)";
     }
-
-
 }

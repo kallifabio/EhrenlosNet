@@ -28,20 +28,18 @@ public class LogInListener implements Listener {
             ServerInfoManager.setUserRecord(ServerInfoManager.getUserRecord() + 1);
         }
 
-        String player = event.getConnection().getName();
-        UUID uuid = event.getConnection().getUniqueId();
+        final String player = event.getConnection().getName();
+        final UUID uuid = event.getConnection().getUniqueId();
         try {
             if (!BanManager.playerExistsBanned(uuid.toString()) || !MuteManager.playerExistsMuted(uuid.toString())) {
-                MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" +
-                        player + "','" + uuid + "','-2','0')");
-                MySQLManager.getStatement("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('0','0','" +
-                        player + "','" + uuid + "','-2','0')");
+                MySQLManager.update("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player + "','" + uuid + "','-2','0')");
+                MySQLManager.update("INSERT INTO MutedPlayers (Muted, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + player + "','" + uuid + "','-2','0')");
             }
-            if (BanManager.isBanned(uuid.toString(), player).booleanValue()) {
-                long current = System.currentTimeMillis();
-                long end = BanManager.getEnd(uuid.toString()).longValue();
+            if (BanManager.isBanned(uuid.toString(), player)) {
+                final long current = System.currentTimeMillis();
+                final long end = BanManager.getEnd(uuid.toString());
                 if (current < end || end == -1L) {
-                    String message = "§bkallifabio.net %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
+                    String message = "§6§lEhrenlosNet %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
                     message = message.replaceAll("%newline%", "\n");
                     message = message.replaceAll("%time%", BanManager.getRemainingTime(BanManager.getUUID(player)));
                     message = message.replaceAll("%reason%", BanManager.getReason(BanManager.getUUID(player)));

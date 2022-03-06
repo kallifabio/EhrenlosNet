@@ -21,7 +21,7 @@ public class onlinetimeCommand extends Command {
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
         if (args.length == 0) {
-            int time = OnlineTimeManager.getTime(player);
+            int time = OnlineTimeManager.getTime(player.getUniqueId());
             boolean isHour = (time >= 60);
             if (isHour) {
                 time /= 60;
@@ -33,7 +33,7 @@ public class onlinetimeCommand extends Command {
         } else if (args.length == 1) {
             String target = args[0];
             if (target != null) {
-                int time = OnlineTimeManager.getTime(player);
+                int time = OnlineTimeManager.getTime(player.getUniqueId());
                 boolean isHour = (time >= 60);
                 if (time > 1) {
                     if (isHour) {

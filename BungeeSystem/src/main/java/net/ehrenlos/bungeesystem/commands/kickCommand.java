@@ -48,7 +48,7 @@ public class kickCommand extends Command {
     public void kickPlayer(final String player, final String reason, final String team) {
         if (ProxyServer.getInstance().getPlayer(player) != null) {
             final ProxiedPlayer target = ProxyServer.getInstance().getPlayer(player);
-            target.disconnect("§bkallifabio.net %newline% §cDu wurdest vom Netzwerk §egekickt! %newline% §7Grund §8» §e%reason% %newline% §7Gekickt von §8» §e%staff%".replaceAll("%newline%", "\n").replaceAll("%reason%", reason).replaceAll("%staff%", team));
+            target.disconnect("§6§lEhrenlosNet %newline% §cDu wurdest vom Netzwerk §egekickt! %newline% §7Grund §8» §e%reason% %newline% §7Gekickt von §8» §e%staff%".replaceAll("%newline%", "\n").replaceAll("%reason%", reason).replaceAll("%staff%", team));
         }
     }
 }

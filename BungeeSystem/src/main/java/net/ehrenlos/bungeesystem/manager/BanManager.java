@@ -12,11 +12,11 @@ public class BanManager {
     static PreparedStatement statement;
     static ResultSet result;
 
-    public static boolean playerExistsBanned(String uuid) {
+    public static boolean playerExistsBanned(String name) {
         try {
-            result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID= '" + uuid + "'");
+            result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player = '" + name + "'");
             if (result.next())
-                return (result.getString("UUID") != null);
+                return (result.getString("Player") != null);
             result.close();
             return false;
         } catch (SQLException e) {
@@ -25,7 +25,7 @@ public class BanManager {
         }
     }
 
-    public static void ban(String team, String uuid, String username, String reason, long seconds) {
+    public static void ban(final String team, final String uuid, final String username, final String reason, final long seconds) {
         long end = 0L;
         if (seconds == -1L) {
             end = -1L;
@@ -35,37 +35,35 @@ public class BanManager {
             end = current + millis;
         }
         removeban(uuid);
-        MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('1','" + team + "','" +
-                username + "','" + uuid + "','" + end + "','" + reason + "')");
+        MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, End, Reason) VALUES ('1','" + team + "','" + username + "','" + end + "','" + reason + "')");
         ProxiedPlayer target = ProxyServer.getInstance().getPlayer(username);
         if (target != null) {
-            String message = "§bkallifabio.net %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
+            String message = "§6§lEhrenlosNet %newline% §cDu wurdest vom Netzwerk §egebannt! %newline% §7Dauer §8» §e%time% %newline% §7Grund §8» §e%reason% %newline% §7Gebannt von §8» §e%staff%";
             message = message.replaceAll("%newline%", "\n");
-            message = message.replaceAll("%time%", getRemainingTime(getUUID(target.getName())));
-            message = message.replaceAll("%reason%", getReason(getUUID(target.getName())));
-            message = message.replaceAll("%staff%", getTeamBanned(getUUID(target.getName())));
+            message = message.replaceAll("%time%", getRemainingTime(target.getName()));
+            message = message.replaceAll("%reason%", getReason(target.getName()));
+            message = message.replaceAll("%staff%", getTeamBanned(target.getName()));
             target.disconnect(message);
         }
     }
 
-    public static void unban(String uuid, String name) {
-        MySQLManager.getStatement("DELETE FROM BannedPlayers WHERE UUID='" + uuid + "'");
-        MySQLManager.getStatement("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + name +
-                "','" + uuid + "','-2','0')");
+    public static void unban(final String uuid, final String name) {
+        MySQLManager.update("DELETE FROM BannedPlayers WHERE UUID='" + uuid + "'");
+        MySQLManager.update("INSERT INTO BannedPlayers (Banned, Staff, Player, UUID, End, Reason) VALUES ('0','0','" + name + "','" + uuid + "','-2','0')");
     }
 
-    public static void removeban(String uuid) {
-        MySQLManager.getStatement("DELETE FROM BannedPlayers WHERE UUID='" + uuid + "'");
+    public static void removeban(String name) {
+        MySQLManager.getStatement("DELETE FROM BannedPlayers WHERE Player ='" + name + "'");
     }
 
-    public static Boolean isBanned(String uuid, String name) {
+    public static Boolean isBanned(String name, String player) {
         Boolean banned = null;
         try {
-            result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID= '" + uuid + "'");
-            if (result.next() && Integer.valueOf(result.getInt("Banned")).intValue() == 0) {
-                banned = Boolean.valueOf(false);
+            result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player = '" + name + "'");
+            if (result.next() && result.getInt("Banned") == 0) {
+                banned = false;
             } else {
-                banned = Boolean.valueOf(true);
+                banned = true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,8 +71,8 @@ public class BanManager {
         return banned;
     }
 
-    public static boolean isBanned(String uuid) {
-        result = MySQLManager.getResult("SELECT End FROM BannedPlayers WHERE UUID='" + uuid + "'");
+    public static boolean isBanned(String name) {
+        result = MySQLManager.getResults("SELECT End FROM BannedPlayers WHERE Player ='" + name + "'");
         try {
             return result.next();
         } catch (SQLException e) {
@@ -83,19 +81,20 @@ public class BanManager {
         }
     }
 
-    public static String getUUID(String name) {
-        result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE Player='" + name + "'");
+    public static String getUUID(final String name) {
+        final ResultSet rs = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player='" + name + "'");
         try {
-            if (result.next())
-                return result.getString("UUID");
+            if (rs.next()) {
+                return rs.getString("UUID");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "No UUID";
     }
 
-    public static String getName(String uuid) {
-        result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID='" + uuid + "'");
+    public static String getName(String name) {
+        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player ='" + name + "'");
         try {
             if (result.next())
                 return result.getString("Player");
@@ -106,7 +105,7 @@ public class BanManager {
     }
 
     public static String getTeamBanned(String name) {
-        result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID='" + name + "'");
+        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player ='" + name + "'");
         try {
             if (result.next())
                 return result.getString("Staff");
@@ -116,8 +115,8 @@ public class BanManager {
         return "No Team Ban";
     }
 
-    public static String getReason(String uuid) {
-        result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID='" + uuid + "'");
+    public static String getReason(String name) {
+        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player ='" + name + "'");
         try {
             if (result.next())
                 return result.getString("Reason");
@@ -127,8 +126,8 @@ public class BanManager {
         return "No Reason";
     }
 
-    public static Long getEnd(String uuid) {
-        result = MySQLManager.getResult("SELECT * FROM BannedPlayers WHERE UUID='" + uuid + "'");
+    public static Long getEnd(String name) {
+        result = MySQLManager.getResults("SELECT * FROM BannedPlayers WHERE Player ='" + name + "'");
         try {
             if (result.next())
                 return Long.valueOf(result.getLong("End"));
@@ -138,9 +137,9 @@ public class BanManager {
         return null;
     }
 
-    public static String getRemainingTime(String uuid) {
+    public static String getRemainingTime(String name) {
         long current = System.currentTimeMillis();
-        long end = getEnd(uuid).longValue();
+        long end = getEnd(name).longValue();
         if (end == -1L)
             return "§ePERMANENT";
         long millis = end - current;

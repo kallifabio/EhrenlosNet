@@ -50,6 +50,27 @@ public class MySQLManager {
     }
     //</editor-fold>
 
+    public static void update(final String query) {
+        if (isConnected()) {
+            try {
+                MySQLManager.connection.createStatement().executeUpdate(query);
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    public static ResultSet getResults(final String query) {
+        if (isConnected()) {
+            try {
+                return MySQLManager.connection.createStatement().executeQuery(query);
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     //<editor-fold defaultstate="collapsed" desc="openConnection">
     public void openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
