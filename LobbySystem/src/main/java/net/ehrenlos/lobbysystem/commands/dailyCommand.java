@@ -16,33 +16,10 @@ import java.util.Random;
 
 public class dailyCommand implements CommandExecutor {
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(LobbySystem.getPrefix() + "§4Du musst ein Spieler sein");
-            return false;
-        }
-
-        final Player player = (Player) sender;
-        if (cmd.getName().equalsIgnoreCase("daily")) {
-            if (args.length == 0) {
-                getDailyCoins(player);
-                player.sendMessage(LobbySystem.getPrefix() + "§7Du hast deine täglichen Coins von §e" + dailycoins + " §7abgeholt");
-            }
-
-            if (args.length >= 1) {
-                player.sendMessage(LobbySystem.getPrefix() + "§cBitte benutze §6/daily");
-            }
-
-        }
-        return false;
-    }
-
     static PreparedStatement statement;
     static ResultSet result;
 
-    static Random random = new Random();
-    static int dailycoins = random.nextInt(500) + 1;
+    int dailycoins;
 
     /**
      * Register Player, Amount
@@ -115,7 +92,7 @@ public class dailyCommand implements CommandExecutor {
      */
 
     //<editor-fold defaultstate="collapsed" desc="getDailyCoins">
-    public static void getDailyCoins(Player player) {
+    public void getDailyCoins(Player player) {
         int coins = getCoins(player);
         if (isRegistered(player)) {
             try {
@@ -145,4 +122,28 @@ public class dailyCommand implements CommandExecutor {
         }
     }
     //</editor-fold>
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(LobbySystem.getPrefix() + "§4Du musst ein Spieler sein");
+            return false;
+        }
+
+        final Player player = (Player) sender;
+        if (cmd.getName().equalsIgnoreCase("daily")) {
+            if (args.length == 0) {
+                Random random = new Random();
+                dailycoins = random.nextInt(500) + 1;
+                getDailyCoins(player);
+                player.sendMessage(LobbySystem.getPrefix() + "§7Du hast deine täglichen Coins von §e" + dailycoins + " §7abgeholt");
+            }
+
+            if (args.length >= 1) {
+                player.sendMessage(LobbySystem.getPrefix() + "§cBitte benutze §6/daily");
+            }
+
+        }
+        return false;
+    }
 }

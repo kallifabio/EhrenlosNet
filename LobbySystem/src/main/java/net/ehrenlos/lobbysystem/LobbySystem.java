@@ -13,6 +13,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.Random;
 
 public class LobbySystem extends JavaPlugin {
 
