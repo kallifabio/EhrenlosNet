@@ -21,6 +21,7 @@ public class bungeehelp extends Command {
         final ProxiedPlayer player = (ProxiedPlayer) sender;
         if (args.length == 0) {
             if (player.hasPermission("bungeesystem.command.bungeehelp")) {
+                player.sendMessage("§8§m-----------§7 [§6Bungee-Help§7] §8§m-------------");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/broadcast §8- §7Mache einen Rundruf");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/coins §8- §7Sehe deine Coins");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/joinme §8- §7Sende eine Nachricht zum nachjoinen");
@@ -31,8 +32,12 @@ public class bungeehelp extends Command {
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/serverinfo §8- §7Zeigt dir Infos über den Server");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/staff §8- §7Zeigt alle Teammitglieder");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/tc §8- §7Schreibe im Teamchat");
+                player.sendMessage(BungeeSystem.getPrefix() + "§e/banhelp §8- §7Zeigt dir die Hilfe für das BanSystem");
+                player.sendMessage(BungeeSystem.getPrefix() + "§e/mutehelp §8- §7Zeigt dir die Hilfe für das MuteSystem");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/bungeehelp §8- §7Zeigt dir diese Hilfe hier");
+                player.sendMessage("§8§m-----------§7 [§6Bungee-Help§7] §8§m-------------");
             } else {
+                player.sendMessage("§8§m-----------§7 [§6Bungee-Help§7] §8§m-------------");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/coins §8- §7Sehe deine Coins");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/joinme §8- §7Sende eine Nachricht zum nachjoinen");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/jump §8- §7Springe zu einem Spieler");
@@ -40,6 +45,7 @@ public class bungeehelp extends Command {
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/onlinetimetop10 §8- §7Sehe die Top 10 Spielzeit");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/ping §8- §7Sehe deinen Ping");
                 player.sendMessage(BungeeSystem.getPrefix() + "§e/bungeehelp §8- §7Zeigt dir diese Hilfe hier");
+                player.sendMessage("§8§m-----------§7 [§6Bungee-Help§7] §8§m-------------");
             }
         }
     }

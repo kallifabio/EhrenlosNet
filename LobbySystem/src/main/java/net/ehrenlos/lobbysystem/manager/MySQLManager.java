@@ -14,7 +14,7 @@ public class MySQLManager {
     private final String user = "nitschpas";
     private final String password = "ehrenlosdatenbank!";
 
-    private static boolean isConnected() {
+    public static boolean isConnected() {
         return connection != null;
     }
 
@@ -50,6 +50,27 @@ public class MySQLManager {
     }
     //</editor-fold>
 
+    public static void update(final String query) {
+        if (isConnected()) {
+            try {
+                MySQLManager.connection.createStatement().executeUpdate(query);
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    public static ResultSet getResults(final String query) {
+        if (isConnected()) {
+            try {
+                return MySQLManager.connection.createStatement().executeQuery(query);
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
+    }
+
     //<editor-fold defaultstate="collapsed" desc="openConnection">
     public void openConnection() throws SQLException, ClassNotFoundException {
         if (connection != null && !connection.isClosed()) {
@@ -60,7 +81,7 @@ public class MySQLManager {
             if (connection != null && !connection.isClosed()) {
                 return;
             }
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true", user, password);
             Bukkit.getConsoleSender().sendMessage(LobbySystem.getPrefix() + "MySQL ist verbunden");
         }

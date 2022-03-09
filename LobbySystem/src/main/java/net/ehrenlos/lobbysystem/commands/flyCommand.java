@@ -12,7 +12,8 @@ public class flyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            return true;
+            sender.sendMessage(LobbySystem.getPrefix() + "Du musst ein Spieler sein");
+            return false;
         }
 
         final Player player = (Player) sender;

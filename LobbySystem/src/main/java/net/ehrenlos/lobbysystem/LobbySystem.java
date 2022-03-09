@@ -1,9 +1,6 @@
 package net.ehrenlos.lobbysystem;
 
-import net.ehrenlos.lobbysystem.commands.flyCommand;
-import net.ehrenlos.lobbysystem.commands.gamemodeCommand;
-import net.ehrenlos.lobbysystem.commands.lobbyhelpCommand;
-import net.ehrenlos.lobbysystem.commands.setlocationCommand;
+import net.ehrenlos.lobbysystem.commands.*;
 import net.ehrenlos.lobbysystem.inventorys.*;
 import net.ehrenlos.lobbysystem.listeners.EntityListener;
 import net.ehrenlos.lobbysystem.listeners.ItemListener;
@@ -57,6 +54,7 @@ public class LobbySystem extends JavaPlugin {
         getCommand("gm").setExecutor(new gamemodeCommand());
         getCommand("fly").setExecutor(new flyCommand());
         getCommand("lobbyhelp").setExecutor(new lobbyhelpCommand());
+        getCommand("daily").setExecutor(new dailyCommand());
     }
 
     private void registerEvents() {
