@@ -74,7 +74,7 @@ public class CoinsSystemManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return 0;
     }
     //</editor-fold>
 

@@ -81,7 +81,7 @@ public class MySQLManager {
             if (connection != null && !connection.isClosed()) {
                 return;
             }
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true", user, password);
             BungeeCord.getInstance().getConsole().sendMessage(BungeeSystem.getPrefix() + "MySQL ist verbunden");
         }
