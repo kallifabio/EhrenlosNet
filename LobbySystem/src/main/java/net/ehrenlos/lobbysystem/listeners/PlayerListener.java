@@ -131,6 +131,7 @@ public class PlayerListener implements Listener {
             }
         }
     }
+    //</editor-fold>
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

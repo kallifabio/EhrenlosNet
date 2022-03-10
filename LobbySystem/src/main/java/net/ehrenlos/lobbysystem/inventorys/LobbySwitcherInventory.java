@@ -40,6 +40,7 @@ public class LobbySwitcherInventory implements Listener {
 
         lobbyswitcherInventory.setItem(0, new ItemManager(Material.PAPER).setDisplayName("§e● §6Lobby-1").build());
         lobbyswitcherInventory.setItem(1, new ItemManager(Material.PAPER).setDisplayName("§e● §6Lobby-2").build());
+        lobbyswitcherInventory.setItem(8, new ItemManager(Material.GLOWSTONE_DUST).setDisplayName("§e● §6PremiumLobby").build());
 
         for (int i = 0; i < lobbyswitcherInventory.getSize(); i++) {
             if (lobbyswitcherInventory.getItem(i) == null) {

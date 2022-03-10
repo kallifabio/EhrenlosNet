@@ -14,7 +14,7 @@ public class checkCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.check") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.check")) {
             if (args.length == 1) {
                 final String player = args[0];
                 if (BanManager.playerExistsBanned(BanManager.getUUID(player)) && MuteManager.playerExistsMuted(MuteManager.getUUID(player))) {
@@ -40,7 +40,7 @@ public class checkCommand extends Command {
                 //sender.sendMessage("§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", player));
             }
         } else {
-            sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/check <Player>"));
+            sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/check <Spieler>"));
         }
         //} else {
         //sender.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());

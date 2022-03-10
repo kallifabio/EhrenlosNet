@@ -20,7 +20,7 @@ public class serverinfoCommand extends Command {
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.command.serverinfo") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.command.serverinfo")) {
             if (args.length == 0) {
                 player.sendMessage(BungeeSystem.getPrefix() + "§8§m-------§c ServerInfo §8§m-------");
                 player.sendMessage(BungeeSystem.getPrefix() + "§7Insgesamt in der Serverliste hinzugefügt §8» §e%total%".replaceAll("%total%", String.valueOf(ServerInfoManager.getTotalPings().size())));

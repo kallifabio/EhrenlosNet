@@ -15,7 +15,7 @@ public class banCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.ban") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.ban")) {
             if (args.length >= 2) {
                 final String target = args[0];
                 String reason = "";
@@ -25,7 +25,7 @@ public class banCommand extends Command {
                 if (BanManager.playerExistsBanned(BanManager.getUUID(target))) {
                     if (ProxyServer.getInstance().getPlayer(target) != null) {
                         final ProxiedPlayer player = ProxyServer.getInstance().getPlayer(target);
-                        if (player.hasPermission("bungeesystem.ban") || player.hasPermission("bungeesystem.*")) {
+                        if (player.hasPermission("bungeesystem.ban")) {
                             sender.sendMessage("§cDu kannst §e%target%§c nicht bannen!".replaceAll("%target%", target));
                             return;
                         }
@@ -37,7 +37,7 @@ public class banCommand extends Command {
                     BanManager.ban(sender.getName(), BanManager.getUUID(target), target, reason, -1L);
                     sender.sendMessage("§aDu hast §e%target% §afür §e%reason% §e%time% §avom Netzwerk gebannt!".replaceAll("%target%", target).replaceAll("%reason%", reason).replaceAll("%time%", "§ePERMANENT"));
                     for (final ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                        if ((players.hasPermission("bungeesystem.staffnotify") || players.hasPermission("bungeesystem.*"))) {
+                        if ((players.hasPermission("bungeesystem.staffnotify"))) {
                             players.sendMessage("§7Der Spieler §e%player% §7wurde von §e%staff% §7für §e%reason% §e%time% §7vom Netzwerk gebannt!".replaceAll("%player%", target).replaceAll("%staff%", sender.getName()).replaceAll("%reason%", reason).replaceAll("%time%", "§ePERMANENT"));
                         }
                     }
@@ -45,7 +45,7 @@ public class banCommand extends Command {
                     sender.sendMessage("§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", target));
                 }
             } else {
-                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/ban <Player> <Reason>"));
+                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/ban <Spieler> <Grund>"));
             }
         } else {
             sender.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());

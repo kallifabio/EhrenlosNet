@@ -20,7 +20,7 @@ public class onlinetimetopCommand extends Command {
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.onlinetime.top") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.onlinetime.top")) {
             if (args.length == 0) {
                 OnlineTimeManager.sendTop10(player);
             } else {

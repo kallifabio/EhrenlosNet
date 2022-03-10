@@ -12,7 +12,7 @@ public class mutehelpCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.mute") || sender.hasPermission("bungeesystem.tempmute") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.mute") || sender.hasPermission("bungeesystem.tempmute")) {
             if (args.length == 0) {
                 sender.sendMessage("§8§m-----------§7 [§cMuteHelp§7] §8§m-------------");
                 sender.sendMessage("§e/mute <Player> <Reason> §8- §7Mute einen Spieler §epermanent §7auf dem Netzwerk!");

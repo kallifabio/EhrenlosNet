@@ -13,6 +13,7 @@ public class unnickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(NickSystem.getPrefix() + "§4Du musst ein Spieler sein");
+            return false;
         }
 
         final Player player = (Player) sender;
@@ -25,6 +26,10 @@ public class unnickCommand implements CommandExecutor {
                     NickAPI.resetGameProfileName(player);
                     NickAPI.refreshPlayer(player);
                     player.sendMessage(NickSystem.getPrefix() + "§2Du hast erfolgreich deinen Nick zurückgesetzt");
+                }
+
+                if (args.length >= 1) {
+                    player.sendMessage(NickSystem.getPrefix() + "§cBitte benutze §6/unnick");
                 }
             } else {
                 player.sendMessage(NickSystem.getPrefix() + NickSystem.getNoPerms());

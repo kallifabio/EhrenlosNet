@@ -15,7 +15,7 @@ public class muteCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.mute") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.mute")) {
             if (args.length >= 2) {
                 final String target = args[0];
                 String reason = "";
@@ -25,7 +25,7 @@ public class muteCommand extends Command {
                 if (MuteManager.playerExistsMuted(MuteManager.getUUID(target))) {
                     if (ProxyServer.getInstance().getPlayer(target) != null) {
                         final ProxiedPlayer player = ProxyServer.getInstance().getPlayer(target);
-                        if (player.hasPermission("bungeesystem.mute") || player.hasPermission("bungeesystem.*")) {
+                        if (player.hasPermission("bungeesystem.mute")) {
                             sender.sendMessage("§cDu kannst §e%target%§c nicht muten!".replaceAll("%target%", target));
                             return;
                         }
@@ -45,7 +45,7 @@ public class muteCommand extends Command {
                     sender.sendMessage("§cDer Spieler §e%target% §cwurde nicht gefunden!".replaceAll("%target%", target));
                 }
             } else {
-                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/mute <Player> <Reason>"));
+                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/mute <Spieler> <Grund>"));
             }
         } else {
             sender.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());

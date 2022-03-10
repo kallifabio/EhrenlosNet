@@ -45,7 +45,7 @@ public class NavigatorInventory implements Listener {
         navigatorInventory.setItem(0, new ItemManager(Material.GRASS_BLOCK).setDisplayName("§e● §6Bauserver").setLore("§7Teleportiere dich zum Bauserver").build());
         navigatorInventory.setItem(20, new ItemManager(Material.OAK_WOOD).setDisplayName("§e● §6FreeBuild").setLore("§7Teleportiere dich zu FreeBuild").build());
         navigatorInventory.setItem(24, new ItemManager(Material.QUARTZ_BLOCK).setDisplayName("§e● §6CityBuild").setLore("§7Teleportiere dich zu CityBuild").build());
-        navigatorInventory.setItem(36, new ItemManager(Material.COBBLESTONE).setDisplayName("§e● §6Lobby Jump And Run 1").setLore("§7Teleportiere dich zum Lobby Jump And Run 1").build());
+        navigatorInventory.setItem(36, new ItemManager(Material.COBBLESTONE).setDisplayName("§e● §6Daily Jump And Run 1").setLore("§7Teleportiere dich zum Daily Jump And Run 1").build());
 
         for (int i = 0; i < navigatorInventory.getSize(); i++) {
             if (navigatorInventory.getItem(i) == null) {
@@ -110,10 +110,10 @@ public class NavigatorInventory implements Listener {
                     player.sendTitle("§d§lTeleport", "§8» §aCityBuild", 25, 25, 25);
                     player.closeInventory();
                     break;
-                case "§e● §6Lobby Jump And Run 1":
-                    player.teleport(LocationManager.getLocation("LobbyJumpAndRun1"));
+                case "§e● §6Daily Jump And Run 1":
+                    player.teleport(LocationManager.getLocation("DailyJumpAndRun1"));
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
-                    player.sendTitle("§d§lTeleport", "§8» §aLobby Jump And Run 1", 25, 25, 25);
+                    player.sendTitle("§d§lTeleport", "§8» §aDaily Jump And Run 1", 25, 25, 25);
                     player.closeInventory();
                     break;
             }

@@ -15,7 +15,7 @@ public class unmuteCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.unmute") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.unmute")) {
             if (args.length == 1) {
                 final String target = args[0];
                 if (MuteManager.playerExistsMuted(MuteManager.getUUID(target))) {
@@ -25,7 +25,7 @@ public class unmuteCommand extends Command {
                         MuteManager.unmute(MuteManager.getUUID(target), target);
                         sender.sendMessage("§7Du hast §e%target%§7 entmutet!".replaceAll("%target%", target));
                         for (final ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                            if ((players.hasPermission("bungeesystem.staffnotify") || players.hasPermission("bungeesystem.*"))) {
+                            if ((players.hasPermission("bungeesystem.staffnotify"))) {
                                 players.sendMessage("§7Der Spieler §e%player% §7wurde von §e%staff%§7 entmutet!".replaceAll("%player%", target).replaceAll("%staff%", String.valueOf(sender)));
                             }
                         }

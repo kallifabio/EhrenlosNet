@@ -30,7 +30,7 @@ public class joinmeCommand extends Command {
         }
 
         final ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.command.joinme") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.command.joinme")) {
             if (args.length == 0) {
                 if (!this.cooldown.contains(player)) {
                     TextComponent message = new TextComponent(BungeeSystem.getPrefix() + "§a[Klicke hier zum verbinden]");
@@ -58,7 +58,7 @@ public class joinmeCommand extends Command {
                     ProxyServer.getInstance().broadcast(msg);
                     ProxyServer.getInstance().broadcast(message);
                     ProxyServer.getInstance().broadcast("");
-                    if (player.hasPermission("bungeesystem.command.joinme.nodelay") || player.hasPermission("bungeesystem.*"))
+                    if (player.hasPermission("bungeesystem.command.joinme.nodelay"))
                         return;
                     this.cooldown.add(player);
                     ProxyServer.getInstance().getScheduler().schedule(BungeeSystem.getInstance(), () -> {

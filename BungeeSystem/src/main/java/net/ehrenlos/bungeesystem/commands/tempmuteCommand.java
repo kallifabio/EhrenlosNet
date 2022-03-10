@@ -18,13 +18,13 @@ public class tempmuteCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.tempmute") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.tempmute")) {
             if (args.length >= 4) {
                 final String target = args[0];
                 if (MuteManager.playerExistsMuted(MuteManager.getUUID(target))) {
                     if (ProxyServer.getInstance().getPlayer(target) != null) {
                         final ProxiedPlayer player = ProxyServer.getInstance().getPlayer(target);
-                        if (player.hasPermission("bungeesystem.tempmute") || player.hasPermission("bungeesystem.*")) {
+                        if (player.hasPermission("bungeesystem.tempmute")) {
                             sender.sendMessage("§cDu kannst §e%target%§c nicht muten!".replaceAll("%target%", target));
                             return;
                         }
@@ -57,7 +57,7 @@ public class tempmuteCommand extends Command {
                         sender.sendMessage(BungeeSystem.getPrefix() + "§cThe unit §e<TimeUnit> §cdoes not exist!");
                     }
                     for (final ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                        if ((players.hasPermission("bungeesystem.staffnotify") || players.hasPermission("bungeesystem.*"))) {
+                        if ((players.hasPermission("bungeesystem.staffnotify"))) {
                             players.sendMessage("§7Der Spieler §e%player% §7wurde von §e%staff% §7für §e%reason% §e%time% §7auf dem Netzwerk gemutet!".replaceAll("%player%", target).replaceAll("%staff%", sender.getName()).replaceAll("%reason%", reason).replaceAll("%time%", "§e" + MuteManager.getRemainingTime(MuteManager.getUUID(target))));
                         }
                     }

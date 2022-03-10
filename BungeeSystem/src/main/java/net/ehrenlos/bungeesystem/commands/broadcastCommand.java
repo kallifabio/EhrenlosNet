@@ -20,7 +20,7 @@ public class broadcastCommand extends Command {
             return;
         }
 
-        if (sender.hasPermission("bungeesystem.command.broadcast") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.command.broadcast")) {
             if (args.length >= 1) {
                 StringBuilder messageBuilder = new StringBuilder();
                 for (int i = 0; i < args.length; i++)
@@ -30,7 +30,7 @@ public class broadcastCommand extends Command {
                 ProxyServer.getInstance().broadcast(message);
                 ProxyServer.getInstance().broadcast("");
             } else {
-                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/broadcast <Messsage>"));
+                sender.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/broadcast <Nachricht>"));
             }
         } else {
             sender.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());

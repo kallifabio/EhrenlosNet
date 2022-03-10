@@ -20,7 +20,7 @@ public class jumpCommand extends Command {
         }
 
         ProxiedPlayer player = (ProxiedPlayer) sender;
-        if (player.hasPermission("bungeesystem.command.jump") || player.hasPermission("bungeesystem.*")) {
+        if (player.hasPermission("bungeesystem.command.jump")) {
             if (args.length == 1) {
                 if (ProxyServer.getInstance().getPlayer(args[0]) != null) {
                     ProxiedPlayer target = ProxyServer.getInstance().getPlayer(args[0]);
@@ -30,7 +30,7 @@ public class jumpCommand extends Command {
                     player.sendMessage(BungeeSystem.getPrefix() + "§7Der Spieler §e%target% §7ist nicht §eonline§7!".replaceAll("%target%", args[0]));
                 }
             } else {
-                player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/jump <Player>"));
+                player.sendMessage(BungeeSystem.getPrefix() + "§cBenutze: §e%command%".replaceAll("%command%", "/jump <Spieler>"));
             }
         } else {
             player.sendMessage(BungeeSystem.getPrefix() + BungeeSystem.getNoPerms());

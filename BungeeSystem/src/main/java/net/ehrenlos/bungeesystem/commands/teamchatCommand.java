@@ -34,8 +34,6 @@ public class teamchatCommand extends Command {
                         all.sendMessage("§cTeamChat §8| §6" + player.getName() + " §7» §e" + message);
                 }
             }
-        } else {
-            player.sendMessage("§7[§6System§7] Unbekannter Befehl");
         }
     }
 

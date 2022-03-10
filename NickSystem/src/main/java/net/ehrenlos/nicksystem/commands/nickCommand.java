@@ -13,12 +13,17 @@ public class nickCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
             sender.sendMessage(NickSystem.getPrefix() + "§4Du musst ein Spieler sein");
+            return false;
         }
 
         final Player player = (Player) sender;
         String name = args[0];
         if (cmd.getName().equalsIgnoreCase("nick")) {
             if (player.hasPermission("nicksystem.command.nick")) {
+                if (args.length == 0) {
+                    player.sendMessage(NickSystem.getPrefix() + "§cBitte benutze §6/nick <Name>");
+                }
+
                 if (args.length == 1) {
                     NickAPI.nick(player, name);
                     NickAPI.setSkin(player, name);

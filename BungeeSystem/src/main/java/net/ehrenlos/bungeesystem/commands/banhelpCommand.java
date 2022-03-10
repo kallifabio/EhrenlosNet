@@ -12,12 +12,12 @@ public class banhelpCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (sender.hasPermission("bungeesystem.ban") || sender.hasPermission("bungeesystem.tempban") || sender.hasPermission("bungeesystem.*")) {
+        if (sender.hasPermission("bungeesystem.ban") || sender.hasPermission("bungeesystem.tempban")) {
             if (args.length == 0) {
                 sender.sendMessage("§8§m-----------§7 [§cBanHelp§7] §8§m-------------");
-                sender.sendMessage("§e/ban <Player> <Reason> §8- §7Banne einen Spieler §epermanent §7vom Netzwerk!");
-                sender.sendMessage("§e/tempban <Player> <Time> <TimeUnit> <Reason> §8- §7Banne einen Spieler §etemporär §7vom Netzwerk!");
-                sender.sendMessage("§e/check <Player> §8- §7Checke den §eBan Status §7von einem Spieler!");
+                sender.sendMessage("§e/ban <Spieler> <Grund> §8- §7Banne einen Spieler §epermanent §7vom Netzwerk!");
+                sender.sendMessage("§e/tempban <Spieler> <Dauer> <Dauerart> <Grund> §8- §7Banne einen Spieler §etemporär §7vom Netzwerk!");
+                sender.sendMessage("§e/check <Spieler> §8- §7Checke den §eBan Status §7von einem Spieler!");
                 sender.sendMessage(" ");
                 sender.sendMessage("§7TimeUnits");
                 sender.sendMessage("§eSekunde(n) §8= §7s");

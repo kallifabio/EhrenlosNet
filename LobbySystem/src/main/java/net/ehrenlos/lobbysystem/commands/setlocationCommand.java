@@ -19,7 +19,7 @@ public class setlocationCommand implements CommandExecutor {
         final Player player = (Player) sender;
         if (player.hasPermission("lobbysystem.command.setlocation")) {
             if (args.length == 0) {
-                player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns, FreeBuild, CityBuild, LobbyJumpAndRun1>");
+                player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns, FreeBuild, CityBuild, DailyJumpAndRun1>");
             } else if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("spawn")) {
                     player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9Spawn §agesetzt");
@@ -36,11 +36,11 @@ public class setlocationCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("citybuild")) {
                     player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9CityBuild §agesetzt");
                     LocationManager.setLocation("CityBuild", player.getLocation());
-                } else if (args[0].equalsIgnoreCase("lobbyjumpandrun1")) {
-                    player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9Lobby Jump And Run 1 §agesetzt");
-                    LocationManager.setLocation("LobbyJumpAndRun1", player.getLocation());
+                } else if (args[0].equalsIgnoreCase("dailyjumpandrun1")) {
+                    player.sendMessage(LobbySystem.getPrefix() + "§aDu hast den Spawn §9Daily Jump And Run 1 §agesetzt");
+                    LocationManager.setLocation("DailyJumpAndRun1", player.getLocation());
                 } else {
-                    player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns, FreeBuild, CityBuild, LobbyJumpAndRun1>");
+                    player.sendMessage("§cBitte benutze §6/setlocation <Spawn, Team, JumpAndRuns, FreeBuild, CityBuild, DailyJumpAndRun1>");
                 }
             }
         } else {
