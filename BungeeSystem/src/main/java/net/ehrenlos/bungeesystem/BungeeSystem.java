@@ -47,7 +47,10 @@ public class BungeeSystem extends Plugin {
             e.printStackTrace();
         }
 
+        MySQL.connect();
+
         ServerInfoManager.startScheduler();
+        OnlineTimeManager.startOnlineTimeTracking();
     }
 
     @Override
@@ -59,6 +62,8 @@ public class BungeeSystem extends Plugin {
 
         BungeeCord.getInstance().getConsole().sendMessage(prefix + "§2MySQL wird geschlossen");
         mySQLManager.closeConnection();
+
+        MySQL.close();
     }
 
     private void registerEvents() {
