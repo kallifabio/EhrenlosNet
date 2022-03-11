@@ -23,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.UUID;
 
 public class PlayerListener implements Listener {
 
@@ -133,6 +134,26 @@ public class PlayerListener implements Listener {
     }
     //</editor-fold>
 
+    /**
+     * Get Time from Player
+     */
+
+    //<editor-fold defaultstate="collapsed" desc="getTime">
+    public static int getTime(final UUID uuid) {
+        if (MySQLManager.isConnected()) {
+            try {
+                result = MySQLManager.getResult("SELECT * FROM OnlineTime WHERE UUID = '" + uuid.toString() + "'");
+                if (result.next()) {
+                    return result.getInt("Time");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
+    }
+    //</editor-fold>
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         player = event.getPlayer();
@@ -184,6 +205,11 @@ public class PlayerListener implements Listener {
 
     private void addScoreBoard(Player player) {
         int coins = getCoins(player.getName());
+        int time = getTime(player.getUniqueId());
+        boolean isHour = (time >= 60);
+        if (isHour) {
+            time /= 60;
+        }
 
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective("scoreboard", "dummy");
@@ -220,7 +246,7 @@ public class PlayerListener implements Listener {
         objective.getScore("§8» §a" + coins).setScore(2);
         objective.getScore("§f").setScore(1);
         objective.getScore("§eDeine Spielzeit").setScore(0);
-        objective.getScore("§8» §cIn Arbeit").setScore(-1);
+        objective.getScore("§8» §a" + time + " Stunde(n)").setScore(-1);
         objective.getScore("§1").setScore(-2);
         objective.getScore("§eTeamspeak§7/§eWebsite").setScore(-3);
         objective.getScore("§8» §aehrenlos.net").setScore(-4);
