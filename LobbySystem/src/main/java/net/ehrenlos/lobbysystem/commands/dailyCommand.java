@@ -1,13 +1,13 @@
 package net.ehrenlos.lobbysystem.commands;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
+import net.ehrenlos.lobbysystem.manager.CooldownManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +20,8 @@ public class dailyCommand implements CommandExecutor {
     static ResultSet result;
 
     int dailycoins;
+
+    CooldownManager cooldownManager = new CooldownManager();
 
     /**
      * Register Player, Amount
@@ -131,12 +133,28 @@ public class dailyCommand implements CommandExecutor {
         }
 
         final Player player = (Player) sender;
+        int timeLeft = cooldownManager.getCooldown(player);
         if (cmd.getName().equalsIgnoreCase("daily")) {
             if (args.length == 0) {
-                Random random = new Random();
-                dailycoins = random.nextInt(500) + 1;
-                getDailyCoins(player);
-                player.sendMessage(LobbySystem.getPrefix() + "§7Du hast deine täglichen Coins von §e" + dailycoins + " §7abgeholt");
+                if (timeLeft == 0) {
+                    Random random = new Random();
+                    dailycoins = random.nextInt(500) + 1;
+                    getDailyCoins(player);
+                    player.sendMessage(LobbySystem.getPrefix() + "§7Du hast deine täglichen Coins von §e" + dailycoins + " §7abgeholt");
+                    cooldownManager.setCooldown(player, CooldownManager.DEFAULT_COOLDOWN);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            int timeLeft = cooldownManager.getCooldown(player);
+                            cooldownManager.setCooldown(player, --timeLeft);
+                            if (timeLeft == 0) {
+                                this.cancel();
+                            }
+                        }
+                    }.runTaskTimer(LobbySystem.getInstance(), 20, 20);
+                } else {
+                    player.sendMessage(LobbySystem.getPrefix() + "§7Du hast noch §c" + timeLeft + " Sekunden (24 Stunden)§7, bevor du deine täglichen Coins abholen kannst.");
+                }
             }
 
             if (args.length >= 1) {

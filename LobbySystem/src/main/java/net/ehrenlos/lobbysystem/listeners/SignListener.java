@@ -1,8 +1,8 @@
 package net.ehrenlos.lobbysystem.listeners;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
+import net.ehrenlos.lobbysystem.manager.CooldownManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,8 @@ public class SignListener implements Listener {
     int wincoins;
 
     Player player;
+
+    CooldownManager cooldownManager = new CooldownManager();
 
     /**
      * Register Player, Amount
@@ -144,10 +147,26 @@ public class SignListener implements Listener {
             if (event.getClickedBlock().getState() instanceof Sign) {
                 Sign sign = (Sign) event.getClickedBlock().getState();
                 if (sign.getLine(0).equalsIgnoreCase("§6Gut gemacht")) {
-                    Random random = new Random();
-                    wincoins = random.nextInt(50) + 1;
-                    getWinCoins(player);
-                    player.sendMessage(LobbySystem.getPrefix() + "§7Du hast dir deine Belohnung von §e" + wincoins + " §7Coins abgeholt");
+                    int timeLeft = cooldownManager.getCooldown(player);
+                    if (timeLeft == 0) {
+                        Random random = new Random();
+                        wincoins = random.nextInt(50) + 1;
+                        getWinCoins(player);
+                        player.sendMessage(LobbySystem.getPrefix() + "§7Du hast dir deine Belohnung von §e" + wincoins + " §7Coins abgeholt");
+                        cooldownManager.setCooldown(player, CooldownManager.DEFAULT_COOLDOWN);
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                int timeLeft = cooldownManager.getCooldown(player);
+                                cooldownManager.setCooldown(player, --timeLeft);
+                                if (timeLeft == 0) {
+                                    this.cancel();
+                                }
+                            }
+                        }.runTaskTimer(LobbySystem.getInstance(), 20, 20);
+                    } else {
+                        player.sendMessage(LobbySystem.getPrefix() + "§7Du hast noch §c" + timeLeft + " Sekunden (24 Stunden)§7, bevor du deine täglichen Coins abholen kannst.");
+                    }
                 }
             }
         }
