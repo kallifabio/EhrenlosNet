@@ -37,6 +37,7 @@ public class GadgetInventory implements Listener {
 
         gadgetInventory.setItem(1, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Köpfe").build());
         gadgetInventory.setItem(4, new ItemManager(Material.ENDER_CHEST).setDisplayName("§e● §6Partikel").build());
+        gadgetInventory.setItem(7, new ItemManager(Material.NETHER_STAR).setDisplayName("§e● §6Extras").build());
 
         for (int i = 0; i < gadgetInventory.getSize(); i++) {
             if (gadgetInventory.getItem(i) == null) {
@@ -62,6 +63,11 @@ public class GadgetInventory implements Listener {
                 case "§e● §6Partikel":
                     player.updateInventory();
                     player.openInventory(ParticleInventory.getParticleInventory());
+                    event.setCancelled(true);
+                    break;
+                case "§e● §6Extras":
+                    player.updateInventory();
+                    player.openInventory(ExtrasInventory.getExtrasInventory());
                     event.setCancelled(true);
                     break;
             }

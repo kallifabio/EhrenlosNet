@@ -19,7 +19,7 @@ public class OnlineTimeManager {
     public static void startOnlineTimeTracking() {
         ProxyServer.getInstance().getScheduler().schedule(BungeeSystem.getInstance(), () -> {
             for (final ProxiedPlayer players : ProxyServer.getInstance().getPlayers()) {
-                if (players.getServer().getInfo().getName().contains("Lobby") || players.getServer().getInfo().getName().contains("Hub") || players.getServer().getInfo().getName().contains("lobby") || players.getServer().getInfo().getName().contains("hub")) {
+                if (players.getServer().getInfo().getName().contains("lobby") || players.getServer().getInfo().getName().contains("hub")) {
                     return;
                 }
                 updateTime(players.getUniqueId());

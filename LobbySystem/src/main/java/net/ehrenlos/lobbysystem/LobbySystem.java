@@ -2,10 +2,7 @@ package net.ehrenlos.lobbysystem;
 
 import net.ehrenlos.lobbysystem.commands.*;
 import net.ehrenlos.lobbysystem.inventorys.*;
-import net.ehrenlos.lobbysystem.listeners.EntityListener;
-import net.ehrenlos.lobbysystem.listeners.ItemListener;
-import net.ehrenlos.lobbysystem.listeners.PlayerListener;
-import net.ehrenlos.lobbysystem.listeners.SignListener;
+import net.ehrenlos.lobbysystem.listeners.*;
 import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
@@ -14,7 +11,6 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
-import java.util.Random;
 
 public class LobbySystem extends JavaPlugin {
 
@@ -66,6 +62,7 @@ public class LobbySystem extends JavaPlugin {
         pluginManager.registerEvents(new ItemListener(), this);
         pluginManager.registerEvents(new EntityListener(), this);
         pluginManager.registerEvents(new SignListener(), this);
+        pluginManager.registerEvents(new EnderpearlListener(), this);
     }
 
     private void registerInventorys() {
@@ -77,6 +74,7 @@ public class LobbySystem extends JavaPlugin {
         pluginManager.registerEvents(new GadgetInventory(), this);
         pluginManager.registerEvents(new HeadsInventory(), this);
         pluginManager.registerEvents(new ParticleInventory(), this);
+        pluginManager.registerEvents(new ExtrasInventory(), this);
     }
 
     @Override
