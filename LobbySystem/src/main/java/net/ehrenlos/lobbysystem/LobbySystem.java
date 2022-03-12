@@ -53,6 +53,7 @@ public class LobbySystem extends JavaPlugin {
         getCommand("fly").setExecutor(new flyCommand());
         getCommand("lobbyhelp").setExecutor(new lobbyhelpCommand());
         getCommand("daily").setExecutor(new dailyCommand());
+        getCommand("clearchat").setExecutor(new clearchatCommand());
     }
 
     private void registerEvents() {

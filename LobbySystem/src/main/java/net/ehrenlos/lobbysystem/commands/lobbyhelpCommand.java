@@ -23,6 +23,7 @@ public class lobbyhelpCommand implements CommandExecutor {
                     player.sendMessage(LobbySystem.getPrefix() + "§e/gamemode §8- §7Ändere deinen Gamemode");
                     player.sendMessage(LobbySystem.getPrefix() + "§e/setlocation §8- §7Setze die Locations");
                     player.sendMessage(LobbySystem.getPrefix() + "§e/daily §8- §7Deine täglichen Coins");
+                    player.sendMessage(LobbySystem.getPrefix() + "§e/clearchat §8- §7Leere den Chat");
                     player.sendMessage(LobbySystem.getPrefix() + "§e/lobbyhelp §8- §7Zeigt dir diese Hilfe hier");
                     player.sendMessage("§8§m-----------§7 [§6LobbyHelp-Help§7] §8§m-------------");
                 } else {
