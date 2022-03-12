@@ -30,7 +30,6 @@ public class PlayerListener implements Listener {
     static PreparedStatement statement;
     static ResultSet result;
     Player player;
-    //</editor-fold>
 
     /**
      * Register Player, Amount
@@ -207,9 +206,6 @@ public class PlayerListener implements Listener {
         int coins = getCoins(player.getName());
         int time = getTime(player.getUniqueId());
         boolean isHour = (time >= 60);
-        if (isHour) {
-            time /= 60;
-        }
 
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective("scoreboard", "dummy");
@@ -246,7 +242,12 @@ public class PlayerListener implements Listener {
         objective.getScore("§8» §a" + coins).setScore(2);
         objective.getScore("§f").setScore(1);
         objective.getScore("§eDeine Spielzeit").setScore(0);
-        objective.getScore("§8» §a" + time + " Stunde(n)").setScore(-1);
+        if (isHour) {
+            time /= 60;
+            objective.getScore("§8» §a" + time + " Stunde(n)").setScore(-1);
+        } else {
+            objective.getScore("§8» §a" + time + " Minute(n)").setScore(-1);
+        }
         objective.getScore("§1").setScore(-2);
         objective.getScore("§eTeamspeak§7/§eWebsite").setScore(-3);
         objective.getScore("§8» §aehrenlos.net").setScore(-4);

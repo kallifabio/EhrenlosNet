@@ -3,6 +3,7 @@ package net.ehrenlos.lobbysystem;
 import net.ehrenlos.lobbysystem.commands.*;
 import net.ehrenlos.lobbysystem.inventorys.*;
 import net.ehrenlos.lobbysystem.listeners.*;
+import net.ehrenlos.lobbysystem.manager.ActionbarManager;
 import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
@@ -78,6 +79,10 @@ public class LobbySystem extends JavaPlugin {
         pluginManager.registerEvents(new ExtrasInventory(), this);
     }
 
+    private void updateBar() {
+        Bukkit.getScheduler().runTaskTimer(this, ActionbarManager::updateActionBar, 20L, 40L);
+    }
+
     @Override
     public void onEnable() {
         instance = this;
@@ -95,6 +100,8 @@ public class LobbySystem extends JavaPlugin {
         }
 
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
+        updateBar();
     }
 
     @Override
