@@ -9,3 +9,4 @@
 ### [BungeeSystem](https://github.com/kallifabio/EhrenlosNet/tree/master/BungeeSystem)
 ### [Jump And Run](https://github.com/kallifabio/EhrenlosNet/tree/master/JumpAndRun)
 ### [NickSystem](https://github.com/kallifabio/EhrenlosNet/tree/master/NickSystem)
+### [HologramSystem](https://github.com/kallifabio/EhrenlosNet/tree/master/HologramSystem)
