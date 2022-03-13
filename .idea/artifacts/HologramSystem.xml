@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="HologramSystem">
+    <output-path>$PROJECT_DIR$/../../Plugin Output/EhrenlosNet/HologramSystem</output-path>
+    <root id="archive" name="HologramSystem.jar">
+      <element id="module-output" name="HologramSystem" />
+    </root>
+  </artifact>
+</component>

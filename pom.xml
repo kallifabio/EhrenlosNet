@@ -13,6 +13,7 @@
         <module>BungeeSystem</module>
         <module>JumpAndRun</module>
         <module>NickSystem</module>
+        <module>HologramSystem</module>
     </modules>
 
     <properties>

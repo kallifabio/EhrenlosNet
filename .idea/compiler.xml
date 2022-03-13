@@ -10,6 +10,7 @@
         <module name="JumpAndRun" />
         <module name="LobbySystem" />
         <module name="BungeeSystem" />
+        <module name="HologramSystem" />
       </profile>
     </annotationProcessing>
   </component>
