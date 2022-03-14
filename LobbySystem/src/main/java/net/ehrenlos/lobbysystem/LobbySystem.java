@@ -90,7 +90,7 @@ public class LobbySystem extends JavaPlugin {
         registerCommands();
         registerInventorys();
 
-        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin wurde aktiviert");
+        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin §9" + getInstance().getDescription().getName() + " §2wurde aktiviert");
 
         try {
             Bukkit.getConsoleSender().sendMessage(prefix + "§2Wird mit MySQL verbunden");
@@ -106,7 +106,7 @@ public class LobbySystem extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin wurde deaktiviert");
+        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin §9" + getInstance().getDescription().getName() + " §cwurde deaktiviert");
 
         Bukkit.getConsoleSender().sendMessage(prefix + "§2MySQL wird geschlossen");
         mySQLManager.closeConnection();

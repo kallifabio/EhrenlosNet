@@ -2,13 +2,12 @@ package net.ehrenlos.hologram.commands;
 
 import net.ehrenlos.hologram.HologramSystem;
 import net.ehrenlos.hologram.manager.HologramsManager;
-import net.ehrenlos.hologram.manager.LocationManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class hologramcreateCommand implements CommandExecutor {
+public class hologramremoveCommand implements CommandExecutor {
 
     HologramsManager hologramsManager = new HologramsManager();
 
@@ -20,16 +19,15 @@ public class hologramcreateCommand implements CommandExecutor {
         }
 
         final Player player = (Player) sender;
-        if (player.hasPermission("hologram.command.create")) {
-            if (cmd.getName().equalsIgnoreCase("hologramcreate")) {
-                if (args.length < 3) {
-                    player.sendMessage(HologramSystem.getPrefix() + "§cBenutze §6/hologramcreate <Name> <Line1> <Line2>");
+        if (player.hasPermission("hologram.command.remove")) {
+            if (cmd.getName().equalsIgnoreCase("hologramremove")) {
+                if (args.length < 1) {
+                    player.sendMessage(HologramSystem.getPrefix() + "§cBenutze §6/hologramremove <Name>");
                 }
 
-                if (args.length == 3) {
-                    LocationManager.setLocation(args[0], player.getLocation());
-                    hologramsManager.createHologramLine2(args[0], LocationManager.getLocation(args[0]), args[1], args[2]);
-                    player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2erstellt");
+                if (args.length == 1) {
+                    hologramsManager.removeHologram(args[0]);
+                    player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2entfernt");
                 }
             }
         } else {

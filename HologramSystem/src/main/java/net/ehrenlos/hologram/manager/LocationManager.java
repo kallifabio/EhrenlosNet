@@ -36,4 +36,14 @@ public class LocationManager {
         location.setPitch(ConfigManager.getHologramData().getInt(name + ".PITCH"));
         return location;
     }
+
+    public static void removeLocation(String name) {
+        ConfigManager.getHologramData().set(name + ".World", null);
+        ConfigManager.getHologramData().set(name + ".X", null);
+        ConfigManager.getHologramData().set(name + ".Y", null);
+        ConfigManager.getHologramData().set(name + ".Z", null);
+        ConfigManager.getHologramData().set(name + ".YAW", null);
+        ConfigManager.getHologramData().set(name + ".PITCH", null);
+        configManager.saveHologramData();
+    }
 }

@@ -1,5 +1,8 @@
 package net.ehrenlos.hologram;
 
+import net.ehrenlos.hologram.commands.hologramcreateCommand;
+import net.ehrenlos.hologram.commands.hologrameditCommand;
+import net.ehrenlos.hologram.commands.hologramremoveCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +27,9 @@ public class HologramSystem extends JavaPlugin {
     }
 
     private void registerCommands() {
-
+        getCommand("hologramcreate").setExecutor(new hologramcreateCommand());
+        getCommand("hologramedit").setExecutor(new hologrameditCommand());
+        getCommand("hologramremove").setExecutor(new hologramremoveCommand());
     }
 
     private void registerEvents() {
@@ -37,11 +42,11 @@ public class HologramSystem extends JavaPlugin {
         registerCommands();
         registerEvents();
 
-        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin wurde aktiviert");
+        Bukkit.getConsoleSender().sendMessage(prefix + "§2Das Plugin §9" + getInstance().getDescription().getName() + " §2wurde aktiviert");
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin wurde deaktiviert");
+        Bukkit.getConsoleSender().sendMessage(prefix + "§cDas Plugin §9" + getInstance().getDescription().getName() + " §cwurde deaktiviert");
     }
 }

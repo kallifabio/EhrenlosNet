@@ -4,3 +4,6 @@ main: net.ehrenlos.hologram.HologramSystem
 version: 1.0
 
 commands:
+  hologramcreate:
+  hologramedit:
+  hologramremove:

@@ -13,6 +13,10 @@ public class NickSystem extends JavaPlugin {
     private static String noPerms = "§4Du hast dazu keine Rechte";
     private static String nick = "§6§lNickSystem §8§l» §r";
 
+    public static NickSystem getInstance() {
+        return instance;
+    }
+
     public static String getPrefix() {
         return prefix;
     }
@@ -30,12 +34,12 @@ public class NickSystem extends JavaPlugin {
         instance = this;
         registerCommands();
 
-        Bukkit.getConsoleSender().sendMessage(nick + "§2Das Plugin wurde aktiviert");
+        Bukkit.getConsoleSender().sendMessage(nick + "§2Das Plugin §9" + getInstance().getDescription().getName() + " §2wurde aktiviert");
     }
 
     @Override
     public void onDisable() {
-        Bukkit.getConsoleSender().sendMessage(nick + "§cDas Plugin wurde deaktiviert");
+        Bukkit.getConsoleSender().sendMessage(nick + "§cDas Plugin §9" + getInstance().getDescription().getName() + " §2wurde deaktiviert");
     }
 
     private void registerCommands() {
