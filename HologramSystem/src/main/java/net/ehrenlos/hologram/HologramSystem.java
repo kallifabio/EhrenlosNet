@@ -1,8 +1,6 @@
 package net.ehrenlos.hologram;
 
-import net.ehrenlos.hologram.commands.hologramcreateCommand;
-import net.ehrenlos.hologram.commands.hologrameditCommand;
-import net.ehrenlos.hologram.commands.hologramremoveCommand;
+import net.ehrenlos.hologram.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,8 +9,8 @@ public class HologramSystem extends JavaPlugin {
 
     private static HologramSystem instance;
 
-    private static String prefix = "§6§lEhrenlosNet §8§l» §r";
-    private static String noPerms = "§4Du hast dazu keine Rechte";
+    private static final String prefix = "§6§lEhrenlosNet §8§l» §r";
+    private static final String noPerms = "§4Du hast dazu keine Rechte";
 
     public static HologramSystem getInstance() {
         return instance;
@@ -29,7 +27,10 @@ public class HologramSystem extends JavaPlugin {
     private void registerCommands() {
         getCommand("hologramcreate").setExecutor(new hologramcreateCommand());
         getCommand("hologramedit").setExecutor(new hologrameditCommand());
+        getCommand("hologramhelp").setExecutor(new hologramhelpCommand());
+        getCommand("hologrammremoveline").setExecutor(new hologramremovelineCommand());
         getCommand("hologramremove").setExecutor(new hologramremoveCommand());
+        getCommand("holograminfo").setExecutor(new holograminfoCommand());
     }
 
     private void registerEvents() {

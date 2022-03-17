@@ -35,8 +35,8 @@ public class HologramsManager {
      * Create Line for Hologram
      */
 
-    public void createHologramLine1(String name, String line1) {
-        ConfigManager.getHologramData().set(name + ".Line1", line1);
+    public void createHologramLine1(String name, Location location, String line1) {
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", line1);
         configManager.saveHologramData();
 
         if (!ConfigManager.getHologram().exists()) {
@@ -56,8 +56,8 @@ public class HologramsManager {
     }
 
     public void createHologramLine2(String name, Location location, String line1, String line2) {
-        ConfigManager.getHologramData().set(name + ".Line1", line1);
-        ConfigManager.getHologramData().set(name + ".Line2", line2);
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", line1);
+        ConfigManager.getHologramData().set(name + ".Lines.Line2", line2);
         configManager.saveHologramData();
 
         if (!ConfigManager.getHologram().exists()) {
@@ -76,10 +76,10 @@ public class HologramsManager {
         holos.add(this);
     }
 
-    public void createHologramLine3(String name, String line1, String line2, String line3) {
-        ConfigManager.getHologramData().set(name + ".Line1", line1);
-        ConfigManager.getHologramData().set(name + ".Line2", line2);
-        ConfigManager.getHologramData().set(name + ".Line3", line3);
+    public void createHologramLine3(String name, Location location, String line1, String line2, String line3) {
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", line1);
+        ConfigManager.getHologramData().set(name + ".Lines.Line2", line2);
+        ConfigManager.getHologramData().set(name + ".Lines.Line3", line3);
         configManager.saveHologramData();
 
         if (!ConfigManager.getHologram().exists()) {
@@ -98,11 +98,11 @@ public class HologramsManager {
         holos.add(this);
     }
 
-    public void createHologramLine4(String name, String line1, String line2, String line3, String line4) {
-        ConfigManager.getHologramData().set(name + ".Line1", line1);
-        ConfigManager.getHologramData().set(name + ".Line2", line2);
-        ConfigManager.getHologramData().set(name + ".Line3", line3);
-        ConfigManager.getHologramData().set(name + ".Line4", line4);
+    public void createHologramLine4(String name, Location location, String line1, String line2, String line3, String line4) {
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", line1);
+        ConfigManager.getHologramData().set(name + ".Lines.Line2", line2);
+        ConfigManager.getHologramData().set(name + ".Lines.Line3", line3);
+        ConfigManager.getHologramData().set(name + ".Lines.Line4", line4);
         configManager.saveHologramData();
 
         if (!ConfigManager.getHologram().exists()) {
@@ -127,7 +127,7 @@ public class HologramsManager {
 
     public void editHologramLine1(String name, String newline1) {
         getHologramLine1(name);
-        ConfigManager.getHologramData().set(name + ".Line1", newline1);
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", newline1);
         configManager.saveHologramData();
 
         hologram.setCustomName(ChatColor.translateAlternateColorCodes('&', newline1));
@@ -138,7 +138,7 @@ public class HologramsManager {
     }
     public void editHologramLine2(String name, String newline2) {
         getHologramLine2(name);
-        ConfigManager.getHologramData().set(name + ".Line2", newline2);
+        ConfigManager.getHologramData().set(name + ".Lines.Line2", newline2);
         configManager.saveHologramData();
 
         hologram.setCustomName(ChatColor.translateAlternateColorCodes('&', newline2));
@@ -149,7 +149,7 @@ public class HologramsManager {
     }
     public void editHologramLine3(String name, String newline3) {
         getHologramLine3(name);
-        ConfigManager.getHologramData().set(name + ".Line3", newline3);
+        ConfigManager.getHologramData().set(name + ".Lines.Line3", newline3);
         configManager.saveHologramData();
 
         hologram.setCustomName(ChatColor.translateAlternateColorCodes('&', newline3));
@@ -160,7 +160,7 @@ public class HologramsManager {
     }
     public void editHologramLine4(String name, String newline4) {
         getHologramLine4(name);
-        ConfigManager.getHologramData().set(name + ".Line4", newline4);
+        ConfigManager.getHologramData().set(name + ".Lines.Line4", newline4);
         configManager.saveHologramData();
 
         hologram.setCustomName(ChatColor.translateAlternateColorCodes('&', newline4));
@@ -184,19 +184,19 @@ public class HologramsManager {
      */
 
     public void removeHologramLine1(String name) {
-        ConfigManager.getHologramData().set(name + ".Line1", null);
+        ConfigManager.getHologramData().set(name + ".Lines.Line1", null);
         configManager.saveHologramData();
     }
     public void removeHologramLine2(String name) {
-        ConfigManager.getHologramData().set(name + ".Line2", null);
+        ConfigManager.getHologramData().set(name + ".Lines.Line2", null);
         configManager.saveHologramData();
     }
     public void removeHologramLine3(String name) {
-        ConfigManager.getHologramData().set(name + ".Line3", null);
+        ConfigManager.getHologramData().set(name + ".Lines.Line3", null);
         configManager.saveHologramData();
     }
     public void removeHologramLine4(String name) {
-        ConfigManager.getHologramData().set(name + ".Line4", null);
+        ConfigManager.getHologramData().set(name + ".Lines.Line4", null);
         configManager.saveHologramData();
     }
 
@@ -205,18 +205,18 @@ public class HologramsManager {
      */
 
     public String getHologramLine1(String name) {
-        return ConfigManager.getHologramData().getString(name + ".Line1");
+        return ConfigManager.getHologramData().getString(name + ".Lines.Line1");
     }
 
     public String getHologramLine2(String name) {
-        return ConfigManager.getHologramData().getString(name + ".Line2");
+        return ConfigManager.getHologramData().getString(name + ".Lines.Line2");
     }
 
     public String getHologramLine3(String name) {
-        return ConfigManager.getHologramData().getString(name + ".Line3");
+        return ConfigManager.getHologramData().getString(name + ".Lines.Line3");
     }
 
     public String getHologramLine4(String name) {
-        return ConfigManager.getHologramData().getString(name + ".Line4");
+        return ConfigManager.getHologramData().getString(name + ".Lines.Line4");
     }
 }

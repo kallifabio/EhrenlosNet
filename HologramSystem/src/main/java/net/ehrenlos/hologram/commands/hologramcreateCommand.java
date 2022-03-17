@@ -22,13 +22,31 @@ public class hologramcreateCommand implements CommandExecutor {
         final Player player = (Player) sender;
         if (player.hasPermission("hologram.command.create")) {
             if (cmd.getName().equalsIgnoreCase("hologramcreate")) {
-                if (args.length < 3) {
-                    player.sendMessage(HologramSystem.getPrefix() + "§cBenutze §6/hologramcreate <Name> <Line1> <Line2>");
+                if (args.length < 2) {
+                    player.sendMessage(HologramSystem.getPrefix() + "§cBenutze §6/hologramcreate <Name> <Line(1,2,3,4)>");
+                }
+
+                if (args.length == 2) {
+                    LocationManager.setLocation(args[0], player.getLocation());
+                    hologramsManager.createHologramLine1(args[0], LocationManager.getLocation(args[0]), args[1]);
+                    player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2erstellt");
                 }
 
                 if (args.length == 3) {
                     LocationManager.setLocation(args[0], player.getLocation());
                     hologramsManager.createHologramLine2(args[0], LocationManager.getLocation(args[0]), args[1], args[2]);
+                    player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2erstellt");
+                }
+
+                if (args.length == 4) {
+                    LocationManager.setLocation(args[0], player.getLocation());
+                    hologramsManager.createHologramLine3(args[0], LocationManager.getLocation(args[0]), args[1], args[2], args[3]);
+                    player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2erstellt");
+                }
+
+                if (args.length == 5) {
+                    LocationManager.setLocation(args[0], player.getLocation());
+                    hologramsManager.createHologramLine4(args[0], LocationManager.getLocation(args[0]), args[1], args[2], args[3], args[4]);
                     player.sendMessage(HologramSystem.getPrefix() + "§2Du hast das Hologram §e" + args[0] + " §2erstellt");
                 }
             }

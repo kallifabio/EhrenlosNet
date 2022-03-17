@@ -7,3 +7,4 @@ commands:
   hologramcreate:
   hologramedit:
   hologramremove:
+  holograminfo:

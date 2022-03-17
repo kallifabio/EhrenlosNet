@@ -9,12 +9,12 @@ public class LocationManager {
     private static ConfigManager configManager = new ConfigManager();
 
     public static void setLocation(String name, Location location) {
-        ConfigManager.getHologramData().set(name + ".World", location.getWorld().getName());
-        ConfigManager.getHologramData().set(name + ".X", location.getX());
-        ConfigManager.getHologramData().set(name + ".Y", location.getY());
-        ConfigManager.getHologramData().set(name + ".Z", location.getZ());
-        ConfigManager.getHologramData().set(name + ".YAW", location.getYaw());
-        ConfigManager.getHologramData().set(name + ".PITCH", location.getPitch());
+        ConfigManager.getHologramData().set(name + ".Position.World", location.getWorld().getName());
+        ConfigManager.getHologramData().set(name + ".Position.X", location.getX());
+        ConfigManager.getHologramData().set(name + ".Position.Y", location.getY());
+        ConfigManager.getHologramData().set(name + ".Position.Z", location.getZ());
+        ConfigManager.getHologramData().set(name + ".Position.YAW", location.getYaw());
+        ConfigManager.getHologramData().set(name + ".Position.PITCH", location.getPitch());
         configManager.saveHologramData();
 
         if (!ConfigManager.getHologram().exists()) {
@@ -27,23 +27,23 @@ public class LocationManager {
     }
 
     public static Location getLocation(String name) {
-        World world = Bukkit.getWorld(ConfigManager.getHologramData().getString(name + ".World"));
-        double x = ConfigManager.getHologramData().getDouble(name + ".X");
-        double y = ConfigManager.getHologramData().getDouble(name + ".Y");
-        double z = ConfigManager.getHologramData().getDouble(name + ".Z");
+        World world = Bukkit.getWorld(ConfigManager.getHologramData().getString(name + ".Position.World"));
+        double x = ConfigManager.getHologramData().getDouble(name + ".Position.X");
+        double y = ConfigManager.getHologramData().getDouble(name + ".Position.Y");
+        double z = ConfigManager.getHologramData().getDouble(name + ".Position.Z");
         Location location = new Location(world, x, y, z);
-        location.setYaw(ConfigManager.getHologramData().getInt(name + ".YAW"));
-        location.setPitch(ConfigManager.getHologramData().getInt(name + ".PITCH"));
+        location.setYaw(ConfigManager.getHologramData().getInt(name + ".Position.YAW"));
+        location.setPitch(ConfigManager.getHologramData().getInt(name + ".Position.PITCH"));
         return location;
     }
 
     public static void removeLocation(String name) {
-        ConfigManager.getHologramData().set(name + ".World", null);
-        ConfigManager.getHologramData().set(name + ".X", null);
-        ConfigManager.getHologramData().set(name + ".Y", null);
-        ConfigManager.getHologramData().set(name + ".Z", null);
-        ConfigManager.getHologramData().set(name + ".YAW", null);
-        ConfigManager.getHologramData().set(name + ".PITCH", null);
+        ConfigManager.getHologramData().set(name + ".Position.World", null);
+        ConfigManager.getHologramData().set(name + ".Position.X", null);
+        ConfigManager.getHologramData().set(name + ".Position.Y", null);
+        ConfigManager.getHologramData().set(name + ".Position.Z", null);
+        ConfigManager.getHologramData().set(name + ".Position.YAW", null);
+        ConfigManager.getHologramData().set(name + ".Position.PITCH", null);
         configManager.saveHologramData();
     }
 }
