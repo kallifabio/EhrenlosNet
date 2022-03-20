@@ -1,5 +1,6 @@
 package net.ehrenlos.lobbysystem.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
@@ -20,6 +21,10 @@ public class EntityListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByBlock(EntityDamageByBlockEvent event) {
-        event.setCancelled(true);
+        if (event.getDamager().getType() == Material.RED_TERRACOTTA) {
+            event.setCancelled(false);
+        } else {
+            event.setCancelled(true);
+        }
     }
 }

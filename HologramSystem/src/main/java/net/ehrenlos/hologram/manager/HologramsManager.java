@@ -3,7 +3,6 @@ package net.ehrenlos.hologram.manager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,6 +176,10 @@ public class HologramsManager {
     public void removeHologram(String name) {
         ConfigManager.getHologramData().set(name, null);
         configManager.saveHologramData();
+
+        hologram.setCustomName(null);
+        hologram.setCustomNameVisible(false);
+        holos.remove(this);
     }
 
     /**

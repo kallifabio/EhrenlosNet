@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class ConfigManager {
 
-    public static File location = new File("plugins/Lobbysystem", "location.yml");
+    public static File location = new File("plugins/JumpAndRun", "location.yml");
     public static FileConfiguration getLocationData = YamlConfiguration.loadConfiguration(location);
     private static FileBuilder builder;
 

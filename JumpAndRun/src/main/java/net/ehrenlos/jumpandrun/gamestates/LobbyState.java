@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 
 public class LobbyState extends GameStates {
 
-    public static final int MIN_PLAYERS = 1, MAX_PLAYERS = 5;
+    public static final int MIN_PLAYERS = 2, MAX_PLAYERS = 5;
 
     private LobbyCountdown lobbyCountdown;
 

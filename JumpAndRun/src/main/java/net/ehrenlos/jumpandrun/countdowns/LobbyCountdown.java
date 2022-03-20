@@ -4,11 +4,12 @@ import net.ehrenlos.jumpandrun.JumpAndRun;
 import net.ehrenlos.jumpandrun.gamestates.GameStates;
 import net.ehrenlos.jumpandrun.gamestates.LobbyState;
 import net.ehrenlos.jumpandrun.manager.GameStatesManager;
+import net.ehrenlos.jumpandrun.voting.Maps;
+import net.ehrenlos.jumpandrun.voting.Voting;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 public class LobbyCountdown extends Countdowns {
 
@@ -41,11 +42,11 @@ public class LobbyCountdown extends Countdowns {
 
                     if (seconds == 3) {
                         Voting voting = gameStatesManager.getPlugin().getVoting();
-                        Map winningMap;
+                        Maps winningMap;
                         if (voting != null) {
                             winningMap = voting.getWinnerMap();
                         } else {
-                            ArrayList<Map> maps = gameStatesManager.getPlugin().getMaps();
+                            ArrayList<Maps> maps = gameStatesManager.getPlugin().getMaps();
                             Collections.shuffle(maps);
                             winningMap = maps.get(0);
                         }
@@ -78,10 +79,11 @@ public class LobbyCountdown extends Countdowns {
 
     public void startIdle() {
         isIdling = true;
-        idleID = Bukkit.getScheduler().scheduleSyncRepeatingTask(gameStatesManager.getPlugin(), () -> {
-            Bukkit.broadcastMessage(JumpAndRun.getPrefix() + "§7Bis zum Start werden noch §6" +
-                    (LobbyState.MIN_PLAYERS - gameStatesManager.getPlugin().getPlayers().size()) +
-                    " §7Spieler benötigt");
+        idleID = Bukkit.getScheduler().scheduleSyncRepeatingTask(gameStatesManager.getPlugin(), new Runnable() {
+            @Override
+            public void run() {
+                Bukkit.broadcastMessage(JumpAndRun.getPrefix() + "§7Bis zum Start werden noch §6" + (LobbyState.MIN_PLAYERS - Bukkit.getOnlinePlayers().size()) + " §7Spieler benötigt");
+            }
         }, 0, 20 * IDLE_TIME);
     }
 
@@ -102,5 +104,33 @@ public class LobbyCountdown extends Countdowns {
 
     public void setSeconds(int seconds) {
         this.seconds = seconds;
+    }
+
+    public GameStatesManager getGameStatesManager() {
+        return gameStatesManager;
+    }
+
+    public int getIdleID() {
+        return idleID;
+    }
+
+    public void setIdleID(int idleID) {
+        this.idleID = idleID;
+    }
+
+    public boolean isIdling() {
+        return isIdling;
+    }
+
+    public void setIdling(boolean idling) {
+        isIdling = idling;
+    }
+
+    public boolean isRunning() {
+        return isRunning;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
     }
 }
