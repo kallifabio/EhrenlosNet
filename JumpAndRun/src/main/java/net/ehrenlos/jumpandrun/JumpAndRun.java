@@ -1,5 +1,6 @@
 package net.ehrenlos.jumpandrun;
 
+import net.ehrenlos.jumpandrun.commands.jumpandrunCommand;
 import net.ehrenlos.jumpandrun.commands.setupCommand;
 import net.ehrenlos.jumpandrun.commands.startCommand;
 import net.ehrenlos.jumpandrun.gamestates.GameStates;
@@ -58,6 +59,7 @@ public class JumpAndRun extends JavaPlugin {
     private void registerCommands() {
         getCommand("start").setExecutor(new startCommand());
         getCommand("setup").setExecutor(new setupCommand());
+        getCommand("jumpandrun").setExecutor(new jumpandrunCommand());
     }
 
     private void registerManager() {
