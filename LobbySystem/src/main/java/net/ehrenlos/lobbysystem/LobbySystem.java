@@ -2,10 +2,7 @@ package net.ehrenlos.lobbysystem;
 
 import net.ehrenlos.lobbysystem.commands.*;
 import net.ehrenlos.lobbysystem.inventorys.*;
-import net.ehrenlos.lobbysystem.listeners.EnderpearlListener;
-import net.ehrenlos.lobbysystem.listeners.ItemListener;
-import net.ehrenlos.lobbysystem.listeners.PlayerListener;
-import net.ehrenlos.lobbysystem.listeners.SignListener;
+import net.ehrenlos.lobbysystem.listeners.*;
 import net.ehrenlos.lobbysystem.manager.ActionbarManager;
 import net.ehrenlos.lobbysystem.manager.ConfigManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
@@ -20,12 +17,12 @@ public class LobbySystem extends JavaPlugin {
 
     private static LobbySystem instance;
 
-    private static String prefix = "§6§lEhrenlosNet §8§l» §r";
-    private static String noPerms = "§4Du hast dazu keine Rechte";
+    private static final String prefix = "§6§lEhrenlosNet §8§l» §r";
+    private static final String noPerms = "§4Du hast dazu keine Rechte";
 
-    private static ConfigManager configManager = new ConfigManager();
-    private static LocationManager locationManager = new LocationManager();
-    private static MySQLManager mySQLManager = new MySQLManager();
+    private static final ConfigManager configManager = new ConfigManager();
+    private static final LocationManager locationManager = new LocationManager();
+    private static final MySQLManager mySQLManager = new MySQLManager();
 
     public static LobbySystem getInstance() {
         return instance;
@@ -65,7 +62,7 @@ public class LobbySystem extends JavaPlugin {
 
         pluginManager.registerEvents(new PlayerListener(), this);
         pluginManager.registerEvents(new ItemListener(), this);
-        //pluginManager.registerEvents(new EntityListener(), this);
+        pluginManager.registerEvents(new EntityListener(), this);
         pluginManager.registerEvents(new SignListener(), this);
         pluginManager.registerEvents(new EnderpearlListener(), this);
     }

@@ -10,7 +10,7 @@ public class EntityListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        event.setCancelled(false);
+        event.setCancelled(true);
     }
 
     @EventHandler
