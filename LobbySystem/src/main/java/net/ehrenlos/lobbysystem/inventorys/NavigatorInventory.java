@@ -1,8 +1,8 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -39,17 +39,17 @@ public class NavigatorInventory implements Listener {
             }
         }
 
-        navigatorInventory.setItem(22, new ItemManager(Material.GOLD_BLOCK).setDisplayName("§e● §6Spawn").setLore("§7Teleportiere dich zum Spawn").build());
-        navigatorInventory.setItem(8, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Team").setLore("§7Teleportiere dich zum Team").build());
-        navigatorInventory.setItem(4, new ItemManager(Material.GREEN_STAINED_GLASS).setDisplayName("§e● §6Jump And Runs").setLore("§7Teleportiere dich zu den Jump And Runs").build());
-        navigatorInventory.setItem(0, new ItemManager(Material.GRASS_BLOCK).setDisplayName("§e● §6Bauserver").setLore("§7Teleportiere dich zum Bauserver").build());
-        navigatorInventory.setItem(20, new ItemManager(Material.OAK_WOOD).setDisplayName("§e● §6FreeBuild").setLore("§7Teleportiere dich zu FreeBuild").build());
-        navigatorInventory.setItem(24, new ItemManager(Material.QUARTZ_BLOCK).setDisplayName("§e● §6CityBuild").setLore("§7Teleportiere dich zu CityBuild").build());
-        navigatorInventory.setItem(36, new ItemManager(Material.COBBLESTONE).setDisplayName("§e● §6Daily Jump And Run 1").setLore("§7Teleportiere dich zum Daily Jump And Run 1").build());
+        navigatorInventory.setItem(22, new ItemBuilder(Material.GOLD_BLOCK).setDisplayName("§e● §6Spawn").setLore("§7Teleportiere dich zum Spawn").build());
+        navigatorInventory.setItem(8, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§e● §6Team").setLore("§7Teleportiere dich zum Team").build());
+        navigatorInventory.setItem(4, new ItemBuilder(Material.GREEN_STAINED_GLASS).setDisplayName("§e● §6Jump And Runs").setLore("§7Teleportiere dich zu den Jump And Runs").build());
+        navigatorInventory.setItem(0, new ItemBuilder(Material.GRASS_BLOCK).setDisplayName("§e● §6Bauserver").setLore("§7Teleportiere dich zum Bauserver").build());
+        navigatorInventory.setItem(20, new ItemBuilder(Material.OAK_WOOD).setDisplayName("§e● §6FreeBuild").setLore("§7Teleportiere dich zu FreeBuild").build());
+        navigatorInventory.setItem(24, new ItemBuilder(Material.QUARTZ_BLOCK).setDisplayName("§e● §6CityBuild").setLore("§7Teleportiere dich zu CityBuild").build());
+        navigatorInventory.setItem(36, new ItemBuilder(Material.COBBLESTONE).setDisplayName("§e● §6Daily Jump And Run 1").setLore("§7Teleportiere dich zum Daily Jump And Run 1").build());
 
         for (int i = 0; i < navigatorInventory.getSize(); i++) {
             if (navigatorInventory.getItem(i) == null) {
-                navigatorInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                navigatorInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }

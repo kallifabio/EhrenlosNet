@@ -1,8 +1,8 @@
 package net.ehrenlos.lobbysystem.listeners;
 
-import net.ehrenlos.lobbysystem.manager.ItemManager;
 import net.ehrenlos.lobbysystem.manager.LocationManager;
 import net.ehrenlos.lobbysystem.manager.MySQLManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
@@ -161,11 +161,11 @@ public class PlayerListener implements Listener {
         player.teleport(LocationManager.getLocation("Spawn"));
 
         player.getInventory().clear();
-        player.getInventory().setItem(0, new ItemManager(Material.COMPASS).setDisplayName("§6Navigator §8| §eRechtsklick").build());
-        player.getInventory().setItem(2, new ItemManager(Material.BARRIER).setDisplayName("§cDu hast derzeit kein Gadget ausgewählt").build());
-        player.getInventory().setItem(4, new ItemManager(Material.CHEST).setDisplayName("§6Gadget §8| §eRechtsklick").build());
-        player.getInventory().setItem(6, new ItemManager(Material.BLAZE_ROD).setDisplayName("§6PlayerHider §8| §eRechtsklick").build());
-        player.getInventory().setItem(8, new ItemManager(Material.LEGACY_WATCH).setDisplayName("§6LobbySwitcher §8| §eRechtsklick").build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.COMPASS).setDisplayName("§6Navigator §8| §eRechtsklick").build());
+        player.getInventory().setItem(2, new ItemBuilder(Material.BARRIER).setDisplayName("§cDu hast derzeit kein Gadget ausgewählt").build());
+        player.getInventory().setItem(4, new ItemBuilder(Material.CHEST).setDisplayName("§6Gadget §8| §eRechtsklick").build());
+        player.getInventory().setItem(6, new ItemBuilder(Material.BLAZE_ROD).setDisplayName("§6PlayerHider §8| §eRechtsklick").build());
+        player.getInventory().setItem(8, new ItemBuilder(Material.LEGACY_WATCH).setDisplayName("§6LobbySwitcher §8| §eRechtsklick").build());
 
         player.setGameMode(GameMode.SURVIVAL);
         player.setHealth(20D);

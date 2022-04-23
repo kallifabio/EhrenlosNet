@@ -11,6 +11,7 @@
         <module name="LobbySystem" />
         <module name="BungeeSystem" />
         <module name="HologramSystem" />
+        <module name="TrollSystem" />
       </profile>
     </annotationProcessing>
   </component>

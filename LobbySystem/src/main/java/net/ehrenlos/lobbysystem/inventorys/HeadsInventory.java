@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -31,22 +31,22 @@ public class HeadsInventory implements Listener {
             event.setCancelled(true);
         }
 
-        headsInventory.setItem(0, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§a" + player.getName() + "'s Kopf").setLore("§8● §7Der hässlichste Kopf von allen", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(1, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("rewinside").setDisplayName("§arewinside's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(2, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("earliboy").setDisplayName("§aearliboy's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(3, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Paluten").setDisplayName("§aPaluten's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(4, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("gamingguidesde").setDisplayName("§agamingguidesde's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(5, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("AviveHD").setDisplayName("§aAviveHD's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(6, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("TZimon").setDisplayName("§aTZimon's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(7, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Niggo").setDisplayName("§aNiggo's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(8, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Howaner").setDisplayName("§aHowaner's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(9, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Clym").setDisplayName("§aClym's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(10, new ItemManager(Material.PLAYER_HEAD, (short) 3).setSkullOwner("ShortByte").setDisplayName("§aShortByte's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
-        headsInventory.setItem(35, new ItemManager(Material.LAVA_BUCKET).setDisplayName("§2Kopf entfernen").build());
+        headsInventory.setItem(0, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner(player.getName()).setDisplayName("§a" + player.getName() + "'s Kopf").setLore("§8● §7Der hässlichste Kopf von allen", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(1, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("rewinside").setDisplayName("§arewinside's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(2, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("earliboy").setDisplayName("§aearliboy's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(3, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Paluten").setDisplayName("§aPaluten's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(4, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("gamingguidesde").setDisplayName("§agamingguidesde's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(5, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("AviveHD").setDisplayName("§aAviveHD's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(6, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("TZimon").setDisplayName("§aTZimon's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(7, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Niggo").setDisplayName("§aNiggo's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(8, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Howaner").setDisplayName("§aHowaner's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(9, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("Clym").setDisplayName("§aClym's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(10, new ItemBuilder(Material.PLAYER_HEAD, (short) 3).setSkullOwner("ShortByte").setDisplayName("§aShortByte's Kopf").setLore("§8● §7Test Lore", "§8● §cPreis§8: §6Coming Soon").build());
+        headsInventory.setItem(35, new ItemBuilder(Material.LAVA_BUCKET).setDisplayName("§2Kopf entfernen").build());
 
         for (int i = 0; i < headsInventory.getSize(); i++) {
             if (headsInventory.getItem(i) == null) {
-                headsInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                headsInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }

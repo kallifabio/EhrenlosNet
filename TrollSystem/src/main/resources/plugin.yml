@@ -1,0 +1,8 @@
+api-version: 1.16
+name: EhrenlosTrollsystem
+version: 1.0
+author: kallifabio
+main: net.ehrenlos.trollsystem.TrollSystem
+
+commands:
+  troll:

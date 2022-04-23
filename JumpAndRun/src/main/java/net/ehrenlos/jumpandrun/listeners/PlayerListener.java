@@ -3,8 +3,8 @@ package net.ehrenlos.jumpandrun.listeners;
 import net.ehrenlos.jumpandrun.JumpAndRun;
 import net.ehrenlos.jumpandrun.countdowns.LobbyCountdown;
 import net.ehrenlos.jumpandrun.gamestates.LobbyState;
-import net.ehrenlos.jumpandrun.manager.ItemManager;
 import net.ehrenlos.jumpandrun.manager.LocationManager;
+import net.ehrenlos.jumpandrun.utils.ItemBuilder;
 import net.ehrenlos.jumpandrun.voting.Voting;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -36,8 +36,8 @@ public class PlayerListener implements Listener {
         event.setJoinMessage(JumpAndRun.getPrefix() + "§a" + player.getDisplayName() + " §8ist dem Spiel beigetreten §8[§2" + Bukkit.getOnlinePlayers().size() + "§8/§4" + LobbyState.MAX_PLAYERS + "§8]");
 
         player.getInventory().clear();
-        player.getInventory().setItem(0, new ItemManager(Material.CHEST).setDisplayName("§eMapVote").build());
-        player.getInventory().setItem(8, new ItemManager(Material.SLIME_BALL).setDisplayName("§cSpiel verlassen").build());
+        player.getInventory().setItem(0, new ItemBuilder(Material.CHEST).setDisplayName("§eMapVote").build());
+        player.getInventory().setItem(8, new ItemBuilder(Material.SLIME_BALL).setDisplayName("§cSpiel verlassen").build());
 
 
         // Wichtige Methode //

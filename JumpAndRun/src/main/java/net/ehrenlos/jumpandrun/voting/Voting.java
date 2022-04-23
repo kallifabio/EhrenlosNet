@@ -1,7 +1,7 @@
 package net.ehrenlos.jumpandrun.voting;
 
 import net.ehrenlos.jumpandrun.JumpAndRun;
-import net.ehrenlos.jumpandrun.manager.ItemManager;
+import net.ehrenlos.jumpandrun.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -45,7 +45,7 @@ public class Voting {
 
         for (int i = 0; i < votingMaps.length; i++) {
             Maps currentMap = votingMaps[i];
-            votingInventory.setItem(votingInventoryOrder[i], new ItemManager(Material.PAPER).setDisplayName("§6" + currentMap.getName() + "§c - §c§l" + currentMap.getVotes() + " Votes").build());
+            votingInventory.setItem(votingInventoryOrder[i], new ItemBuilder(Material.PAPER).setDisplayName("§6" + currentMap.getName() + "§c - §c§l" + currentMap.getVotes() + " Votes").build());
         }
     }
     //</editor-fold>

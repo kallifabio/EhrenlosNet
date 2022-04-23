@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -10,7 +10,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -36,13 +35,13 @@ public class PlayerHiderInventory implements Listener {
             }
         }
 
-        playerhiderInventory.setItem(1, new ItemManager(Material.GREEN_DYE).setDisplayName("§e● §2Spieler anzeigen").build());
-        playerhiderInventory.setItem(4, new ItemManager(Material.PURPLE_DYE).setDisplayName("§e● §dNur VIPs anzeigen").build());
-        playerhiderInventory.setItem(7, new ItemManager(Material.RED_DYE).setDisplayName("§e● §cSpieler verstecken").build());
+        playerhiderInventory.setItem(1, new ItemBuilder(Material.GREEN_DYE).setDisplayName("§e● §2Spieler anzeigen").build());
+        playerhiderInventory.setItem(4, new ItemBuilder(Material.PURPLE_DYE).setDisplayName("§e● §dNur VIPs anzeigen").build());
+        playerhiderInventory.setItem(7, new ItemBuilder(Material.RED_DYE).setDisplayName("§e● §cSpieler verstecken").build());
 
         for (int i = 0; i < playerhiderInventory.getSize(); i++) {
             if (playerhiderInventory.getItem(i) == null) {
-                playerhiderInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                playerhiderInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }

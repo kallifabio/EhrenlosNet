@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -31,12 +31,12 @@ public class ExtrasInventory implements Listener {
             event.setCancelled(true);
         }
 
-        extrasInventory.setItem(0, new ItemManager(Material.ENDER_PEARL).setDisplayName("§aEnderperle").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        extrasInventory.setItem(35, new ItemManager(Material.LAVA_BUCKET).setDisplayName("§2Extras entfernen").build());
+        extrasInventory.setItem(0, new ItemBuilder(Material.ENDER_PEARL).setDisplayName("§aEnderperle").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        extrasInventory.setItem(35, new ItemBuilder(Material.LAVA_BUCKET).setDisplayName("§2Extras entfernen").build());
 
         for (int i = 0; i < extrasInventory.getSize(); i++) {
             if (extrasInventory.getItem(i) == null) {
-                extrasInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                extrasInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }
@@ -52,12 +52,12 @@ public class ExtrasInventory implements Listener {
             switch (event.getCurrentItem().getItemMeta().getDisplayName()) {
                 case "§aEnderperle":
                     player.sendMessage(LobbySystem.getPrefix() + "§2Du hast das Extra §6Enderperle §2ausgewählt");
-                    player.getInventory().setItem(2, new ItemManager(Material.ENDER_PEARL).setDisplayName("§aEnderperle").build());
+                    player.getInventory().setItem(2, new ItemBuilder(Material.ENDER_PEARL).setDisplayName("§aEnderperle").build());
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.closeInventory();
                     break;
                 case "§2Extras entfernen":
-                    player.getInventory().setItem(2, new ItemManager(Material.BARRIER).setDisplayName("§cDu hast derzeit kein Gadget ausgewählt").build());
+                    player.getInventory().setItem(2, new ItemBuilder(Material.BARRIER).setDisplayName("§cDu hast derzeit kein Gadget ausgewählt").build());
                     player.sendMessage(LobbySystem.getPrefix() + "§aDein Extra wurde entfernt");
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 10);
                     player.closeInventory();

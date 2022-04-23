@@ -1,4 +1,4 @@
-package net.ehrenlos.jumpandrun.manager;
+package net.ehrenlos.lobbysystem.utils;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,37 +10,37 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ItemManager {
+public class ItemBuilder {
 
     private ItemStack itemStack;
     private ItemMeta itemMeta;
 
-    public ItemManager(final Material material, final short subID) {
+    public ItemBuilder(final Material material, final short subID) {
         itemStack = new ItemStack(material, 1, subID);
         itemMeta = itemStack.getItemMeta();
     }
 
-    public ItemManager(final Material material) {
+    public ItemBuilder(final Material material) {
         itemStack = new ItemStack(material, 1, (short) 0);
         itemMeta = itemStack.getItemMeta();
     }
 
-    public ItemManager setDisplayName(final String displayName) {
+    public ItemBuilder setDisplayName(final String displayName) {
         this.itemMeta.setDisplayName(displayName);
         return this;
     }
 
-    public ItemManager setSubID(final byte subID) {
+    public ItemBuilder setSubID(final byte subID) {
         itemStack.getData().setData(subID);
         return this;
     }
 
-    public ItemManager setLore(final String... lore) {
+    public ItemBuilder setLore(final String... lore) {
         this.itemMeta.setLore(Arrays.asList(lore));
         return this;
     }
 
-    public ItemManager addLoreLine(final String line) {
+    public ItemBuilder addLoreLine(final String line) {
         if (this.itemMeta.getLore() != null)
             this.itemMeta.getLore().add(line);
         else {
@@ -52,7 +52,7 @@ public class ItemManager {
         return this;
     }
 
-    public ItemManager addLoreArray(final String[] array) {
+    public ItemBuilder addLoreArray(final String[] array) {
         if (this.itemMeta.getLore() != null) {
             for (String current : array) {
                 this.itemMeta.getLore().add(current);
@@ -64,27 +64,27 @@ public class ItemManager {
         return this;
     }
 
-    public ItemManager setSkullOwner(final String owner) {
+    public ItemBuilder setSkullOwner(final String owner) {
         ((SkullMeta) this.itemMeta).setOwner(owner);
         return this;
     }
 
-    public ItemManager setType(final Material material) {
+    public ItemBuilder setType(final Material material) {
         this.itemStack.setType(material);
         return this;
     }
 
-    public ItemManager setAmount(final Integer amount) {
+    public ItemBuilder setAmount(final Integer amount) {
         this.itemStack.setAmount(amount);
         return this;
     }
 
-    public ItemManager addEnchantment(final Enchantment enchantment) {
+    public ItemBuilder addEnchantment(final Enchantment enchantment) {
         this.itemMeta.addEnchant(enchantment, 1, false);
         return this;
     }
 
-    public ItemManager addEnchantment(final Enchantment enchantment, final Integer power) {
+    public ItemBuilder addEnchantment(final Enchantment enchantment, final Integer power) {
         this.itemMeta.addEnchant(enchantment, power, false);
         return this;
     }

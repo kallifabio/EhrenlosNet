@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.listeners;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.EnderPearl;
@@ -27,7 +27,7 @@ public class EnderpearlListener implements Listener {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 event.setCancelled(true);
 
-                player.getInventory().setItem(2, new ItemManager(Material.LEGACY_FIREWORK_CHARGE).setDisplayName("§7§lEnderperle").build());
+                player.getInventory().setItem(2, new ItemBuilder(Material.LEGACY_FIREWORK_CHARGE).setDisplayName("§7§lEnderperle").build());
                 player.updateInventory();
 
                 EnderPearl enderPearl = player.launchProjectile(EnderPearl.class);
@@ -36,7 +36,7 @@ public class EnderpearlListener implements Listener {
                 enderPearls.put(player, enderPearl);
 
                 Bukkit.getScheduler().runTaskLater(LobbySystem.getInstance(), () -> {
-                    player.getInventory().setItem(2, new ItemManager(Material.ENDER_PEARL).setDisplayName("§aEnderperle").build());
+                    player.getInventory().setItem(2, new ItemBuilder(Material.ENDER_PEARL).setDisplayName("§aEnderperle").build());
                     player.updateInventory();
                 }, 20 * 5);
             }

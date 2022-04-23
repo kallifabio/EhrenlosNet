@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -38,13 +38,13 @@ public class LobbySwitcherInventory implements Listener {
             }
         }
 
-        lobbyswitcherInventory.setItem(0, new ItemManager(Material.PAPER).setDisplayName("§e● §6Lobby-1").build());
-        lobbyswitcherInventory.setItem(1, new ItemManager(Material.PAPER).setDisplayName("§e● §6Lobby-2").build());
-        lobbyswitcherInventory.setItem(8, new ItemManager(Material.GLOWSTONE_DUST).setDisplayName("§e● §6PremiumLobby").build());
+        lobbyswitcherInventory.setItem(0, new ItemBuilder(Material.PAPER).setDisplayName("§e● §6Lobby-1").build());
+        lobbyswitcherInventory.setItem(1, new ItemBuilder(Material.PAPER).setDisplayName("§e● §6Lobby-2").build());
+        lobbyswitcherInventory.setItem(8, new ItemBuilder(Material.GLOWSTONE_DUST).setDisplayName("§e● §6PremiumLobby").build());
 
         for (int i = 0; i < lobbyswitcherInventory.getSize(); i++) {
             if (lobbyswitcherInventory.getItem(i) == null) {
-                lobbyswitcherInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                lobbyswitcherInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }

@@ -1,7 +1,7 @@
 package net.ehrenlos.lobbysystem.inventorys;
 
 import net.ehrenlos.lobbysystem.LobbySystem;
-import net.ehrenlos.lobbysystem.manager.ItemManager;
+import net.ehrenlos.lobbysystem.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -31,17 +31,17 @@ public class ParticleInventory implements Listener {
             event.setCancelled(true);
         }
 
-        particleInventory.setItem(0, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aHerzen").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(1, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aFeuer").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(2, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aWasser").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(3, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aRauch").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(4, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aZauber").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(5, new ItemManager(Material.LEATHER_BOOTS).setDisplayName("§aWolken").setLore("§8● §cPreis§8: §6Coming Soon").build());
-        particleInventory.setItem(35, new ItemManager(Material.LAVA_BUCKET).setDisplayName("§2Partikel entfernen").build());
+        particleInventory.setItem(0, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aHerzen").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(1, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aFeuer").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(2, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aWasser").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(3, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aRauch").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(4, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aZauber").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(5, new ItemBuilder(Material.LEATHER_BOOTS).setDisplayName("§aWolken").setLore("§8● §cPreis§8: §6Coming Soon").build());
+        particleInventory.setItem(35, new ItemBuilder(Material.LAVA_BUCKET).setDisplayName("§2Partikel entfernen").build());
 
         for (int i = 0; i < particleInventory.getSize(); i++) {
             if (particleInventory.getItem(i) == null) {
-                particleInventory.setItem(i, new ItemManager(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
+                particleInventory.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setDisplayName("§r").build());
             }
         }
     }
