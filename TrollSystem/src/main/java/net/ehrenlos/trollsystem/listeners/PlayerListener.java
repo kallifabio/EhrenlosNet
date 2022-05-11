@@ -25,7 +25,7 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         String name = "";
         Player target = Bukkit.getPlayer(name);
-        if (TrollSystem.getInstance().freeze.contains(target)) {
+        if (TrollSystem.getInstance().freezePlayer.contains(event.getPlayer())) {
             event.setCancelled(true);
         } else {
             event.setCancelled(false);

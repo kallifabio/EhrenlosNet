@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="TrollSystem">
+    <output-path>$PROJECT_DIR$/../../Plugin Output/EhrenlosNet/TrollSystem</output-path>
+    <root id="archive" name="TrollSystem.jar">
+      <element id="module-output" name="TrollSystem" />
+    </root>
+  </artifact>
+</component>
