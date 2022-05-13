@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 public class Community extends JavaPlugin {
 
-    private static final String prefix = "§aBeFizzi §8» §r";
+    private static final String prefix = "§a§lBeFizzi Community §8§l» §r";
     private static final MySQLManager mysqlManager = new MySQLManager();
     private static Community instance;
 

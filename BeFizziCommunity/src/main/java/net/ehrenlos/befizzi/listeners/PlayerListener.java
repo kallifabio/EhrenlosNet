@@ -66,15 +66,16 @@ public class PlayerListener implements Listener {
         Objective objective = scoreboard.registerNewObjective("scoreboard", "dummy");
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.setDisplayName("§a§lBeFizzi");
+        objective.setDisplayName("§a§lBeFizzi Community");
 
-        objective.getScore("§8§m---------------").setScore(10);
-        objective.getScore("§eDeine Spielzeit").setScore(0);
+        objective.getScore("§8§m---------------").setScore(3);
+        objective.getScore(" ").setScore(2);
+        objective.getScore("§eDeine Spielzeit").setScore(1);
         if (isHour) {
             time /= 60;
-            objective.getScore("§8» §6" + time + " Stunde(n)").setScore(-1);
+            objective.getScore("§8» §6" + time + " Stunde(n)").setScore(0);
         } else {
-            objective.getScore("§8» §6" + time + " Minute(n)").setScore(-1);
+            objective.getScore("§8» §6" + time + " Minute(n)").setScore(0);
         }
 
         for (Player all : Bukkit.getOnlinePlayers()) {
