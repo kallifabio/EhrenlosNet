@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="BeFizziCommunity">
+    <output-path>$PROJECT_DIR$/../../Plugin Output/EhrenlosNet/BeFizziCommunity</output-path>
+    <root id="archive" name="BeFizziCommunity.jar">
+      <element id="module-output" name="BeFizziCommunity" />
+    </root>
+  </artifact>
+</component>

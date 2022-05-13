@@ -12,6 +12,7 @@
         <module name="BungeeSystem" />
         <module name="HologramSystem" />
         <module name="TrollSystem" />
+        <module name="BeFizziCommunity" />
       </profile>
     </annotationProcessing>
   </component>

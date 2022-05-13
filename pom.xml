@@ -15,6 +15,7 @@
         <module>NickSystem</module>
         <module>HologramSystem</module>
         <module>TrollSystem</module>
+        <module>BeFizziCommunity</module>
     </modules>
 
     <properties>
