@@ -1,5 +1,6 @@
 package net.ehrenlos.befizzi;
 
+import net.ehrenlos.befizzi.commands.*;
 import net.ehrenlos.befizzi.listeners.PlayerListener;
 import net.ehrenlos.befizzi.listeners.SleepListener;
 import net.ehrenlos.befizzi.manager.ActionbarManager;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 public class Community extends JavaPlugin {
 
     private static final String prefix = "§a§lBeFizzi Community §8§l» §r";
+    private static final String noPermission = "§4Du hast dazu keine Rechte";
     private static final MySQLManager mysqlManager = new MySQLManager();
     private static Community instance;
 
@@ -26,6 +28,10 @@ public class Community extends JavaPlugin {
 
     public static MySQLManager getMysqlManager() {
         return mysqlManager;
+    }
+
+    public static String getNoPermission() {
+        return noPermission;
     }
 
     @Override
@@ -55,7 +61,11 @@ public class Community extends JavaPlugin {
     }
 
     private void registerCommands() {
-
+        getCommand("sethome").setExecutor(new sethomeCommand());
+        getCommand("homes").setExecutor(new homesCommand());
+        getCommand("delhome").setExecutor(new delhomeCommand());
+        getCommand("home").setExecutor(new homeCommand());
+        getCommand("homesystem").setExecutor(new homesystemCommand());
     }
 
     private void registerEvents() {

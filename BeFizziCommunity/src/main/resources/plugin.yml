@@ -3,3 +3,10 @@ name: Community
 version: 1.0
 author: kallifabio
 main: net.ehrenlos.befizzi.Community
+
+commands:
+  sethome:
+  homes:
+  delhome:
+  home:
+  homesystem:
