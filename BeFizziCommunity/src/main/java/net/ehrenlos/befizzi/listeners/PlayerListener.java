@@ -47,7 +47,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage(Community.getPrefix() + "§2Der Spieler §e" + player.getName() + " §2hat den Server betreten");
 
-        player.sendTitle("§7Willkommen bei der §aBeFizzi Community§e", player.getName(), 25, 30, 25);
+        player.sendTitle("§7Willkommen §e" + player.getName() + "§7,", "§7bei der §aBeFizzi Community", 25, 30, 25);
 
         addScoreBoard(player);
     }
