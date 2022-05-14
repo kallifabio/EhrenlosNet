@@ -29,7 +29,10 @@ public class homesCommand implements CommandExecutor {
                 if (args.length == 1) {
                     final Player target = Bukkit.getServer().getPlayer(args[0]);
                     ConfigurationSection section = ConfigManager.getLocationData().getConfigurationSection(target.getName());
-                    String homes = String.valueOf(section.getKeys(false));
+                    String homes = null;
+                    if (section != null) {
+                        homes = String.valueOf(section.getKeys(false));
+                    }
                     player.sendMessage(Community.getPrefix() + "§bDas sind die Homes von §e" + target.getName() + " §7" + homes);
                 }
             } else {
