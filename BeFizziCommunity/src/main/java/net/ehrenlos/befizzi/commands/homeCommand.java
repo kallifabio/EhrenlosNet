@@ -28,6 +28,11 @@ public class homeCommand implements CommandExecutor {
                     player.teleport(LocationManager.getLocation(player.getName(), args[0]));
                     player.sendMessage(Community.getPrefix() + "§2Du hast dich zu deinem Home §7" + args[0] + " §2teleportiert");
                 }
+
+                if (args.length == 2) {
+                    player.teleport(LocationManager.getLocation(args[0], args[1]));
+                    player.sendMessage(Community.getPrefix() + "§2Du hast dich zu dem Home §7" + args[1] + " §2von §7" + args[0] + " §2teleportiert");
+                }
             } else {
                 player.sendMessage(Community.getPrefix() + Community.getNoPermission());
             }

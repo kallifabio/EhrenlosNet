@@ -15,6 +15,7 @@ public class Community extends JavaPlugin {
 
     private static final String prefix = "§a§lBeFizzi Community §8§l» §r";
     private static final String noPermission = "§4Du hast dazu keine Rechte";
+    private static final String noHomePermission = "§4Du kannst dich nicht zu diesem Home teleportieren";
     private static final MySQLManager mysqlManager = new MySQLManager();
     private static Community instance;
 
@@ -32,6 +33,10 @@ public class Community extends JavaPlugin {
 
     public static String getNoPermission() {
         return noPermission;
+    }
+
+    public static String getNoHomePermission() {
+        return noHomePermission;
     }
 
     @Override

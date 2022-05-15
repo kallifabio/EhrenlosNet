@@ -68,15 +68,24 @@ public class PlayerListener implements Listener {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         objective.setDisplayName("§a§lBeFizzi Community");
 
-        objective.getScore("§8§m---------------").setScore(3);
-        objective.getScore(" ").setScore(2);
-        objective.getScore("§eDeine Spielzeit").setScore(1);
+        objective.getScore("§8§m---------------").setScore(11);
+        objective.getScore(" ").setScore(10);
+        objective.getScore("§eDeine Spielzeit").setScore(9);
         if (isHour) {
             time /= 60;
-            objective.getScore("§8» §6" + time + " Stunde(n)").setScore(0);
+            objective.getScore("§8» §6" + time + " Stunde(n)").setScore(8);
         } else {
-            objective.getScore("§8» §6" + time + " Minute(n)").setScore(0);
+            objective.getScore("§8» §6" + time + " Minute(n)").setScore(8);
         }
+        objective.getScore("§").setScore(7);
+        objective.getScore("§eTwitch").setScore(6);
+        objective.getScore("§8» §6BeFizzi").setScore(5);
+        objective.getScore("§f").setScore(4);
+        objective.getScore("§eTwitter").setScore(3);
+        objective.getScore("§8» §6@be_fizzi").setScore(2);
+        objective.getScore("§e").setScore(1);
+        objective.getScore("§eYouTube").setScore(0);
+        objective.getScore("§8» §6Fizzi").setScore(-1);
 
         for (Player all : Bukkit.getOnlinePlayers()) {
             player.setScoreboard(scoreboard);
