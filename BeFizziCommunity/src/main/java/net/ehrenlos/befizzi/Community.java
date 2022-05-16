@@ -16,6 +16,7 @@ public class Community extends JavaPlugin {
     private static final String prefix = "§a§lBeFizzi Community §8§l» §r";
     private static final String noPermission = "§4Du hast dazu keine Rechte";
     private static final String noHomePermission = "§4Du kannst dich nicht zu diesem Home teleportieren";
+    private static final String noHomeOwner = "§4Du bist nicht der Besitzer dieses Homes";
     private static final MySQLManager mysqlManager = new MySQLManager();
     private static Community instance;
 
@@ -37,6 +38,10 @@ public class Community extends JavaPlugin {
 
     public static String getNoHomePermission() {
         return noHomePermission;
+    }
+
+    public static String getNoHomeOwner() {
+        return noHomeOwner;
     }
 
     @Override
@@ -71,6 +76,8 @@ public class Community extends JavaPlugin {
         getCommand("delhome").setExecutor(new delhomeCommand());
         getCommand("home").setExecutor(new homeCommand());
         getCommand("homesystem").setExecutor(new homesystemCommand());
+        getCommand("invsee").setExecutor(new invseeCommand());
+        getCommand("setstatus").setExecutor(new setstatusCommand());
     }
 
     private void registerEvents() {

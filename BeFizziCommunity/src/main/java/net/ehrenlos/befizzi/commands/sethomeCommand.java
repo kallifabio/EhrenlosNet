@@ -29,8 +29,8 @@ public class sethomeCommand implements CommandExecutor {
                 if (args.length == 1) {
                     ConfigurationSection section = ConfigManager.getLocationData().getConfigurationSection(player.getName());
                     if (section != null) {
-                        if (section.getKeys(false).size() == 3) {
-                            player.sendMessage(Community.getPrefix() + "§cDein Limit von §73 Homes §cwurde erreicht");
+                        if (section.getKeys(false).size() == 5) {
+                            player.sendMessage(Community.getPrefix() + "§cDein Limit von §75 Homes §cwurde erreicht");
                         } else {
                             LocationManager.setLocation(player.getName(), args[0], player.getLocation());
                             player.sendMessage(Community.getPrefix() + "§2Du hast einen Home §7" + args[0] + " §2erstellt");

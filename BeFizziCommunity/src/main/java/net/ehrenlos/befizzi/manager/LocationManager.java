@@ -41,4 +41,8 @@ public class LocationManager {
         ConfigManager.getLocationData().set(player + "." + name, null);
         configManager.saveLocationData();
     }
+
+    public static String getPlayer(String player) {
+        return ConfigManager.getLocationData().getString(player);
+    }
 }

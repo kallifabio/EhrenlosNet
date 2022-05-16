@@ -2,6 +2,7 @@ package net.ehrenlos.befizzi.commands;
 
 import net.ehrenlos.befizzi.Community;
 import net.ehrenlos.befizzi.manager.LocationManager;
+import net.ehrenlos.befizzi.manager.StatusManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,7 @@ public class homeCommand implements CommandExecutor {
             if (player.hasPermission("community.command.home")) {
                 if (args.length == 0) {
                     player.sendMessage(Community.getPrefix() + "§cBitte benutze §e/home <Home>");
+                    player.sendMessage(Community.getPrefix() + "§cBitte benutze §e/home <Spieler> <Home>");
                 }
 
                 if (args.length == 1) {
@@ -30,8 +32,14 @@ public class homeCommand implements CommandExecutor {
                 }
 
                 if (args.length == 2) {
-                    player.teleport(LocationManager.getLocation(args[0], args[1]));
-                    player.sendMessage(Community.getPrefix() + "§2Du hast dich zu dem Home §7" + args[1] + " §2von §7" + args[0] + " §2teleportiert");
+                    // true = open
+                    // false = private
+                    if (StatusManager.getStatus(args[0], args[1]) == true) {
+                        player.teleport(LocationManager.getLocation(args[0], args[1]));
+                        player.sendMessage(Community.getPrefix() + "§2Du hast dich zu dem Home §7" + args[1] + " §2von §7" + args[0] + " §2teleportiert");
+                    } else {
+                        player.sendMessage(Community.getPrefix() + Community.getNoHomePermission());
+                    }
                 }
             } else {
                 player.sendMessage(Community.getPrefix() + Community.getNoPermission());

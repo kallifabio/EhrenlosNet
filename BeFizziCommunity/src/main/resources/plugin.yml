@@ -9,3 +9,5 @@ commands:
   delhome:
   home:
   homesystem:
+  invsee:
+  setstatus:
