@@ -34,7 +34,7 @@ public class homeCommand implements CommandExecutor {
                 if (args.length == 2) {
                     // true = open
                     // false = private
-                    if (StatusManager.getStatus(args[0], args[1]) == true) {
+                    if (StatusManager.getStatus(args[0], args[1]) == true || player.hasPermission("community.command.home.bypass")) {
                         player.teleport(LocationManager.getLocation(args[0], args[1]));
                         player.sendMessage(Community.getPrefix() + "§2Du hast dich zu dem Home §7" + args[1] + " §2von §7" + args[0] + " §2teleportiert");
                     } else {

@@ -20,17 +20,13 @@ public class setstatusCommand implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("setstatus")) {
             if (player.hasPermission("community.commands.setstatus")) {
-                if (args.length < 3) {
-                    player.sendMessage(Community.getPrefix() + "§cBitte benutze §e/setstatus <Spieler> <Home> <true | false>");
+                if (args.length < 2) {
+                    player.sendMessage(Community.getPrefix() + "§cBitte benutze §e/setstatus <Home> <true (open) | false (private)>");
                 }
 
-                if (args.length == 3) {
-                    //if (Objects.equals(LocationManager.getPlayer(args[0]), player.getName())) {
-                    StatusManager.setStatus(args[0], args[1], Boolean.parseBoolean(args[2]));
-                    player.sendMessage(Community.getPrefix() + "§2Du hast den Home §7" + args[1] + " §2von §7" + args[0] + " §2auf §7" + args[2] + " §2gestellt");
-                    //} else {
-                    //player.sendMessage(Community.getPrefix() + Community.getNoHomeOwner());
-                    //}
+                if (args.length == 2) {
+                    StatusManager.setStatus(player.getName(), args[0], Boolean.parseBoolean(args[1]));
+                    player.sendMessage(Community.getPrefix() + "§2Du hast dein Home §7" + args[0] + " §2auf §7" + args[1] + " §2gestellt");
                 }
             } else {
                 player.sendMessage(Community.getPrefix() + Community.getNoPermission());

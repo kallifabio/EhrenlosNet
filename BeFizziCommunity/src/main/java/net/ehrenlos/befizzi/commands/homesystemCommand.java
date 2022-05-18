@@ -26,7 +26,7 @@ public class homesystemCommand implements CommandExecutor {
                 player.sendMessage(Community.getPrefix() + "§e/sethome <Name> §8- §eSetze einen Home");
                 player.sendMessage(Community.getPrefix() + "§e/delhome <Home> §8- §eLösche einen Home");
                 player.sendMessage(Community.getPrefix() + "§e/invsee <Spieler> §8- §eÖffne das Inventar eines Spielers");
-                player.sendMessage(Community.getPrefix() + "§e/setstatus <Spieler> <Home> <true | false> §8- §eSetzte den Status deines Homes");
+                player.sendMessage(Community.getPrefix() + "§e/setstatus <Home> <true (open) | false (private)> §8- §eSetzte den Status deines Homes");
                 player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
                 player.sendMessage(" ");
             }
