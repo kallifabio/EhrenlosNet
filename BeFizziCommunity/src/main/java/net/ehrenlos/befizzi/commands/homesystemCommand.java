@@ -18,18 +18,37 @@ public class homesystemCommand implements CommandExecutor {
         final Player player = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("homesystem")) {
-            if (args.length == 0) {
-                player.sendMessage(" ");
-                player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
-                player.sendMessage(Community.getPrefix() + "§e/home <Spieler> <Home> §8- §eTeleportiere dich zu einem Home");
-                player.sendMessage(Community.getPrefix() + "§e/homes <Spieler> §8- §eLasse dir alle Homes anzeigen");
-                player.sendMessage(Community.getPrefix() + "§e/sethome <Name> §8- §eSetze einen Home");
-                player.sendMessage(Community.getPrefix() + "§e/delhome <Home> §8- §eLösche einen Home");
-                player.sendMessage(Community.getPrefix() + "§e/invsee <Spieler> §8- §eÖffne das Inventar eines Spielers");
-                player.sendMessage(Community.getPrefix() + "§e/setstatus <Home> <true (open) | false (private)> §8- §eSetzte den Status deines Homes");
-                player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
-                player.sendMessage(" ");
+            if (player.hasPermission("community.command.homesystem.admin")) {
+                if (args.length == 0) {
+                    player.sendMessage(" ");
+                    player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
+                    player.sendMessage(Community.getPrefix() + "§e/home <Home> §8- §eTeleportiere dich zu deinem Home");
+                    player.sendMessage(Community.getPrefix() + "§e/home <Spieler> <Home> §8- §eTeleportiere dich zu einem Home");
+                    player.sendMessage(Community.getPrefix() + "§e/homes <Spieler> §8- §eLasse dir alle Homes anzeigen");
+                    player.sendMessage(Community.getPrefix() + "§e/sethome <Name> §8- §eSetze einen Home");
+                    player.sendMessage(Community.getPrefix() + "§e/delhome <Home> §8- §eLösche einen Home");
+                    player.sendMessage(Community.getPrefix() + "§e/invsee <Spieler> §8- §eÖffne das Inventar eines Spielers");
+                    player.sendMessage(Community.getPrefix() + "§e/setstatus <Home> <true (open) | false (private)> §8- §eSetzte den Status deines Homes");
+                    player.sendMessage(Community.getPrefix() + "§e/msg <Spieler> <Nachricht> §8- §eSende eine private Nachricht");
+                    player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
+                    player.sendMessage(" ");
+                }
+            } else {
+                if (args.length == 0) {
+                    player.sendMessage(" ");
+                    player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
+                    player.sendMessage(Community.getPrefix() + "§e/home <Home> §8- §eTeleportiere dich zu deinem Home");
+                    player.sendMessage(Community.getPrefix() + "§e/home <Spieler> <Home> §8- §eTeleportiere dich zu einem Home");
+                    player.sendMessage(Community.getPrefix() + "§e/homes <Spieler> §8- §eLasse dir alle Homes anzeigen");
+                    player.sendMessage(Community.getPrefix() + "§e/sethome <Name> §8- §eSetze einen Home");
+                    player.sendMessage(Community.getPrefix() + "§e/delhome <Home> §8- §eLösche einen Home");
+                    player.sendMessage(Community.getPrefix() + "§e/setstatus <Home> <true (open) | false (private)> §8- §eSetzte den Status deines Homes");
+                    player.sendMessage(Community.getPrefix() + "§e/msg <Spieler> <Nachricht> §8- §eSende eine private Nachricht");
+                    player.sendMessage("§8§m-----------§7 [§6HomeSystem§7] §8§m-------------");
+                    player.sendMessage(" ");
+                }
             }
+
         }
         return false;
     }

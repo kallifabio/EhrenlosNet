@@ -11,3 +11,4 @@ commands:
   homesystem:
   invsee:
   setstatus:
+  msg:

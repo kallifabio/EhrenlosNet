@@ -78,6 +78,7 @@ public class Community extends JavaPlugin {
         getCommand("homesystem").setExecutor(new homesystemCommand());
         getCommand("invsee").setExecutor(new invseeCommand());
         getCommand("setstatus").setExecutor(new setstatusCommand());
+        getCommand("msg").setExecutor(new msgCommand());
     }
 
     private void registerEvents() {
